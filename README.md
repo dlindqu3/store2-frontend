@@ -7,6 +7,13 @@
 - https://github.com/dlindqu3/store2-backend
 
 
+## image sources
+1. Bike image: photo by Robert Bye on Unsplash. 
+2. Coffee mug image: photo by Merve Sehirli Nasir on Unsplash. 
+3. Drums image: photo by David Martin on Unsplash.
+4. Ukulele image: Photo by Joints Creative on Unsplash.
+  
+
 ## citations 
 1. The Net Ninja, "MERN Stack Tutorial #8 - Making a React App", [link](https://www.youtube.com/watch?v=bx4nk7kBS10&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=8)
 2. "POST Requests with Axios", [link](https://masteringjs.io/tutorials/axios/post)

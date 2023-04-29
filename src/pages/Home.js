@@ -8,30 +8,32 @@ function Home() {
   const [products, setProducts] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
-  //   //Runs only on the first render
-  //   // let baseURL = "http://localhost:4000/"
-  //   let baseURL = 'https://store-backend-arv3.onrender.com/'
-  //   let queryUrl = baseURL + 'api/products/get-all-products'
+  useEffect(() => {
+    //Runs only on the first render
+    let baseURL = "http://127.0.0.1:8000"
+    let queryUrl = baseURL + '/api/products'
 
-  //   let getProducts = async () => {
-  //   try {
+    let getProducts = async () => {
+    try {
+      console.log("useEffect running")
+    // console.log('currentUser: ', currentUser, "currentToken: ", currentToken)
+      let resData = await axios.get(queryUrl, {
+        headers:{
+          "Accept": "application/json"
+        }
+      })
 
-  //   // console.log('currentUser: ', currentUser, "currentToken: ", currentToken)
-  //     let resData = await axios.get(queryUrl, {
-  //       headers: { Authorization: `Bearer ${currentToken}` }
-  //   })
-  //     let productsArray = resData.data.allProducts
-  //     // console.log('productsArray: ', productsArray)
-  //     setProducts(productsArray)
-  //   } catch (err){
-  //     setErrorText(err.message)
-  //     // console.log(err.message)
-  //   }
-  //   }  
-  //   getProducts()
-  //   setIsLoading(false)
-  // }, []);
+      let productsArray = resData.data
+      console.log('productsArray: ', productsArray)
+      setProducts(productsArray)
+    } catch (err){
+      setErrorText(err.message)
+      console.log("Error:", err.message)
+    }
+    }  
+    getProducts()
+    setIsLoading(false)
+  }, []);
 
 
 
@@ -42,13 +44,14 @@ function Home() {
     {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
       <h2>Home page AA</h2>
 
-      {/* {isLoading && <p>Loading...</p>} */}
-      {/* <div>
+      {isLoading && <p>Loading...</p>}
+
+      <div>
       {products && products.map((item) => {
-          return <ProductCard productData={item} key={item._id} />
+          return <ProductCardHome productData={item} key={item._id} />
       })}
-      </div> */}
-      {/* {errorText && console.log('error text: ', errorText)} */}
+      </div>
+      {errorText && console.log('error text: ', errorText)}
     </div>
   )
 }
