@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+## overview 
+- This site was developed as a portfolio project by Dwight Lindquist. It is the second iteration of his ecommerce store app, this time built with React and Laravel. 
+- Visitors can create user accounts then browse for various fake products. They can then add products to a cart, proceed to a checkout handled by Stripe, then see records of past orders from their account. The user is advised to use the credit card number "4242 4242 4242 4242" in order to successfully proceed with a fake payment via Stripe. The tech stack includes Laravel, SQL, and React. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## backend repository on GitHub 
+- https://github.com/dlindqu3/store2-backend
 
-## Available Scripts
 
-In the project directory, you can run:
+## citations 
+1. "POST Requests with Axios", [link](https://masteringjs.io/tutorials/axios/post)
+2. "Importing images from public folder in react", [link](https://stackoverflow.com/questions/71881492/importing-images-from-public-folder-in-react)
+3. PedroTech, "Protected Routes in ReactJS - React Router Dom", [link](https://www.youtube.com/watch?v=qnH5KNtRYEI)
+4. "Error: [PrivateRoute] is not a component. All component children of must be a or <React.Fragment>", [link](https://stackoverflow.com/questions/69864165/error-privateroute-is-not-a-route-component-all-component-children-of-rou)
+5. W.S. Toh, "2 Ways To Check If Value Exists In Javascript Object", [link](https://code-boxx.com/check-value-exists-in-object-javascript/)
+6. Nick Scialli, "Why you can't set state multiple times in a row in React", [link](https://typeofnan.dev/why-you-cant-setstate-multiple-times-in-a-row/)
+7. "Check if token expired using this JWT library", [link](https://stackoverflow.com/questions/51292406/check-if-token-expired-using-this-jwt-library)
+8. "Clearing localStorage in javascript?", [link](https://stackoverflow.com/questions/7667958/clearing-localstorage-in-javascript)
+9. "How to trigger useEffects before render in React?", [link](https://stackoverflow.com/questions/63711013/how-to-trigger-useeffects-before-render-in-react)
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
