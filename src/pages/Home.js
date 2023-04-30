@@ -46,9 +46,9 @@ function Home() {
 
       {isLoading && <p>Loading...</p>}
 
-      <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
       {products && products.map((item) => {
-          return <ProductCardHome productData={item} key={item._id} />
+          return <ProductCardHome productData={item} key={item.id} />
       })}
       </div>
       {errorText && console.log('error text: ', errorText)}
