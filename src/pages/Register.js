@@ -15,31 +15,36 @@ function Register({ setCurrentUser, setCurrentToken, setCurrentUserEmail, setCur
   let navigate = useNavigate();
 
   const signup = async (username, email, password) => {
-    let baseURL = `http://localhost:4000/api/user/signup`
+
+    let baseURL = "http://127.0.0.1:8000"
+    let queryUrl = baseURL + '/api/user/register'
 
 
     let reqBody = {
       username: username,
       email: email,
-      password: password,
+      password: password
     };
 
+    let reqHeaders = {
+      headers:{
+        "Accept": "application/json"
+    }
+  }
+
     try {
-      // console.log('baseURL: ', baseURL)
-      // console.log('reqBody: ', reqBody)
-      const res = await axios.post(baseURL, reqBody)
-      // res.data is an object with keys of 'username' and 'token'
-      localStorage.setItem("store-user", JSON.stringify(res.data))
-      setCurrentUserEmail(res.data.email)
-      setCurrentUser(res.data.username)
-      setCurrentToken(res.data.token)
-      setCurrentUserId(res.data._id)
-      // console.log('currentUser: ', res.data.username)
-      // console.log('currentUser token: ', res.data.token)
+
+      const res = await axios.post(queryUrl, reqBody, reqHeaders)
+      console.log("res.Data from signup: ", res.data)
+      localStorage.setItem("store2-user", JSON.stringify(res.data))
       navigate("/");
+
     } catch (error) {
-      setSignupError(error.response.data.error)
-      // console.log(error)
+      if (error.response.data.message){
+        setSignupError(error.response.data.error)
+      } else {
+        console.log(error)
+      }
     }
   };
 
@@ -57,7 +62,11 @@ function Register({ setCurrentUser, setCurrentToken, setCurrentUserEmail, setCur
     e.preventDefault();
     setIsLoading(true)
     setSignupError("");
-    let signupDone = await signup(username, email, password)
+    if (password.length < 8){
+      setSignupError("Please enter a password with at least 8 characters.")
+    } else {
+      let registrationData = await signup(username, email, password)
+    }
     setIsLoading(false)
   };
 
@@ -106,16 +115,13 @@ function Register({ setCurrentUser, setCurrentToken, setCurrentUserEmail, setCur
                   handlePasswordDisplay();
                 }}
               />
-              {displayPassword && <span >Hide password</span>}
-              {!displayPassword && <span >Show password</span>}
+            <span >Show password</span>
+              
             </div>
 
             <div >
               {signupError ? <p>**{signupError}</p> : <p></p>}
               {isLoading ? <p>Loading...</p> : <p></p>}
-              {/* {!isLoading && console.log('not loading')} */}
-              {/* {isLoading && console.log('loading')} */}
-              <p>Note: the password must contain at least one capital letter, one lowercase letter, one special character, and a number. It must also be at least 8 characters long.</p>
             </div>
 
             <div >
