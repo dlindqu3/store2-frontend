@@ -87,7 +87,7 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
       <div >
         <div>
           <form onSubmit={handleSubmit}>
-            <h4 >Sign Up</h4>
+            <h4 >Register</h4> 
             <label >Username:</label>
             <div >
               <input

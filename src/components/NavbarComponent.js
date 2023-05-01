@@ -1,20 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function NavbarComponent({ currentUsername, setCurrentUsername }) {
+  let navigate = useNavigate();
 
   return (
-    <div>
-      <div>
-        <Link to="/">Home</Link>
-        <br />
-        <Link to="/register">Register</Link>
-        <br />
-        <Link to="/login">Login</Link>
-        <br />
-        { currentUsername ? <p>{currentUsername}</p> : <p></p> } 
-      </div>
-    </div>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" >
+          <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              { !currentUsername && <Nav.Link href="/register">Register</Nav.Link> }
+              { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
+              { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
