@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ProductCardHome from '../components/ProductCardHome'
 import axios from 'axios'
 
+
 function Home() {
 
   const [errorText, setErrorText] = useState()
@@ -40,11 +41,11 @@ function Home() {
 
     {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
     {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
-      <h2>Home page AA</h2>
+      <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Products </h2>
 
       {isLoading && <p>Loading...</p>}
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {
           return <ProductCardHome productData={item} key={item.id} />
       })}
