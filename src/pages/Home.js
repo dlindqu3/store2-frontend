@@ -15,7 +15,6 @@ function Home() {
 
     let getProducts = async () => {
     try {
-      console.log("useEffect running")
     // console.log('currentUser: ', currentUser, "currentToken: ", currentToken)
       let resData = await axios.get(queryUrl, {
         headers:{
@@ -24,7 +23,6 @@ function Home() {
       })
 
       let productsArray = resData.data
-      console.log('productsArray: ', productsArray)
       setProducts(productsArray)
     } catch (err){
       setErrorText(err.message)

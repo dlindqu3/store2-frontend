@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 
-function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId, setCart }) {
-  const [username, setUsername] = useState("")
+function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [signupError, setSignupError] = useState("")
@@ -14,47 +13,52 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
 
   let navigate = useNavigate();
 
-  const signup = async (username, email, password) => {
-
+  const login = async (email, password) => {
     let baseURL = "http://127.0.0.1:8000"
-    let queryUrl = baseURL + '/api/user/register'
+    let loginUrl = baseURL + "/api/user/login"
+
     let createCartUrl = baseURL + "/api/carts"
 
     let reqBody = {
-      username: username,
       email: email,
       password: password
     };
 
+  
+  
     let reqHeaders = {
-      headers:{
-        "Accept": "application/json"
+        headers:{
+          "Accept": "application/json"
+      }
     }
-  }
 
     try {
 
-      const res = await axios.post(queryUrl, reqBody, reqHeaders)
-      console.log("res.Data from signup: ", res.data)
-      localStorage.setItem("store2-user", JSON.stringify(res.data))
-      
-      setCurrentUsername(res.data.user.username)
-      setCurrentToken(res.data.token)
-      setCurrentUserEmail(res.data.user.email)
-      setCurrentUserId(res.data.user.id)
+        const res = await axios.post(loginUrl, reqBody, reqHeaders)
+        console.log("res.data: ", res.data) 
+        let store2User = {
+            store2Email: res.data.user.email,
+            store2Username: res.data.user.username,
+            store2Token: res.data.token, 
+            store2UserId: res.data.user.id
+        }
 
-      // create new cart with new user's id 
-      const res2 = await axios.post(createCartUrl, { "user_id": res.data.user.id }, reqHeaders)
-      console.log("new cart data: ", res2.data)
-      setCart(res2.data)
+        let cartReqBody = {
+          "user_id": res.data.user.id
+        }
 
-      navigate("/");
+        let newCartRes = await axios.post(loginUrl, reqBody, reqHeaders)
+        console.log("newCartRes.data: ", newCartRes.data)
 
+        // console.log("store2User: ", store2User)
+        localStorage.setItem("store2-user", store2User)
+        setCurrentUserEmail(store2User["store2Email"])
+        setCurrentUsername(store2User["store2Username"])
+        setCurrentToken(store2User["store2Token"])
+        setCurrentUserId(store2User["store2UserId"])
+        navigate("/")
     } catch (error) {
         console.log(error)
-        if (error.response.data.message){
-          setSignupError(error.response.data.message)
-        }
     }
   };
 
@@ -70,13 +74,10 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log('login handleSubmit called')
     setIsLoading(true)
     setSignupError("");
-    if (password.length < 8){
-      setSignupError("Please enter a password with at least 8 characters.")
-    } else {
-      let registrationData = await signup(username, email, password)
-    }
+    login(email, password)
     setIsLoading(false)
   };
 
@@ -87,17 +88,7 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
       <div >
         <div>
           <form onSubmit={handleSubmit}>
-            <h4 >Sign Up</h4>
-            <label >Username:</label>
-            <div >
-              <input
-                type="text"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                value={username}
-              />
-            </div>
+            <h4 >Login </h4>
             <label >Email:</label>
             <div >
               <input
@@ -125,8 +116,8 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
                   handlePasswordDisplay();
                 }}
               />
-            <span >Show password</span>
-              
+              {displayPassword && <span >Hide password</span>}
+              {!displayPassword && <span >Show password</span>}
             </div>
 
             <div >
@@ -146,4 +137,4 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
   );
 }
 
-export default Register;
+export default Login;
