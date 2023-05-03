@@ -41,7 +41,7 @@ function Home() {
 
     {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
     {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
-      <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Products </h2>
+      <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Home</h2>
 
       {isLoading && <p>Loading...</p>}
 

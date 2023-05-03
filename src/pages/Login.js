@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 
-function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId }) {
+function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId, setCart, setCartItems }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [signupError, setSignupError] = useState("")
@@ -17,15 +17,13 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
     let baseURL = "http://127.0.0.1:8000"
     let loginUrl = baseURL + "/api/user/login"
 
-    let createCartUrl = baseURL + "/api/carts"
+    let getCartUrl = baseURL + "/api/carts/"
 
     let reqBody = {
       email: email,
       password: password
     };
-
-  
-  
+    
     let reqHeaders = {
         headers:{
           "Accept": "application/json"
@@ -43,12 +41,19 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             store2UserId: res.data.user.id
         }
 
-        let cartReqBody = {
-          "user_id": res.data.user.id
-        }
+        let req2Url = getCartUrl + res.data.user.id
 
-        let newCartRes = await axios.post(loginUrl, reqBody, reqHeaders)
-        console.log("newCartRes.data: ", newCartRes.data)
+        // get cart for this user
+        let res2 = await axios.get(req2Url, reqHeaders)
+        console.log("res2 cart: ", res2)
+        console.log("cart data: ", res2.data[0]) 
+        setCart(res2.data[0])
+
+        // get cart items linked to the given cart
+        let getCartItemsUrl = baseURL + "/api/cart_items/" + res2.data[0]["id"]
+        let res3 = await axios.get(getCartItemsUrl, reqHeaders)
+        console.log("cart items data: ", res3.data)
+        setCartItems(res3.data)
 
         // console.log("store2User: ", store2User)
         localStorage.setItem("store2-user", store2User)
@@ -56,7 +61,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         setCurrentUsername(store2User["store2Username"])
         setCurrentToken(store2User["store2Token"])
         setCurrentUserId(store2User["store2UserId"])
-        navigate("/")
+        navigate("/all-products")
     } catch (error) {
         console.log(error)
     }

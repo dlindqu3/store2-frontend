@@ -6,7 +6,7 @@ function ProductCardHome({ productData }) {
 
   return (
     <div style={{ }}>
-      <Card style={{ maxWidth: "50vh", marginBottom: "3vh", marginTop: "3vh", minHeight: "60vh" }}>
+      <Card style={{ maxWidth: "50vh", marginBottom: "3vh", marginTop: "3vh", minHeight: "55vh" }}>
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
           <Card.Title>{productData.brand}: {productData.name}</Card.Title>
