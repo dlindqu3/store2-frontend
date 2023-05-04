@@ -45,10 +45,15 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
 
       // create new cart with new user's id 
       const res2 = await axios.post(createCartUrl, { "user_id": res.data.user.id }, reqHeaders)
-      console.log("new cart data: ", res2.data)
-      setCart(res2.data)
 
-      navigate("/");
+      let getCartURL = baseURL + "/api/carts/" + res.data.user.id
+      const res3 = await axios.get(getCartURL, reqHeaders)
+      console.log("new cart data: ", res3.data)
+      
+      // THIS IS FULL CART WITH total_cost, set state with it
+      setCart(res3.data[0])
+
+      navigate("/all-products");
 
     } catch (error) {
         console.log(error)
