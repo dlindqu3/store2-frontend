@@ -36,24 +36,16 @@ function Register({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, se
 
       const res = await axios.post(queryUrl, reqBody, reqHeaders)
       console.log("res.Data from signup: ", res.data)
-      localStorage.setItem("store2-user", JSON.stringify(res.data))
-      
-      setCurrentUsername(res.data.user.username)
-      setCurrentToken(res.data.token)
-      setCurrentUserEmail(res.data.user.email)
-      setCurrentUserId(res.data.user.id)
 
       // create new cart with new user's id 
       const res2 = await axios.post(createCartUrl, { "user_id": res.data.user.id }, reqHeaders)
 
+      // prove that new cart persists 
       let getCartURL = baseURL + "/api/carts/" + res.data.user.id
       const res3 = await axios.get(getCartURL, reqHeaders)
       console.log("new cart data: ", res3.data)
       
-      // THIS IS FULL CART WITH total_cost, set state with it
-      setCart(res3.data[0])
-
-      navigate("/all-products");
+      navigate("/login");
 
     } catch (error) {
         console.log(error)
