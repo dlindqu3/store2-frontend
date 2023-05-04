@@ -32,8 +32,10 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
     try {
 
+      
         const res = await axios.post(loginUrl, reqBody, reqHeaders)
         console.log("res.data: ", res.data) 
+        
         let store2User = {
             store2Email: res.data.user.email,
             store2Username: res.data.user.username,
@@ -55,13 +57,13 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         console.log("cart items data: ", res3.data)
         setCartItems(res3.data)
 
-        // console.log("store2User: ", store2User)
         localStorage.setItem("store2-user", store2User)
         setCurrentUserEmail(store2User["store2Email"])
         setCurrentUsername(store2User["store2Username"])
         setCurrentToken(store2User["store2Token"])
         setCurrentUserId(store2User["store2UserId"])
         navigate("/all-products")
+        
     } catch (error) {
         console.log(error)
     }
