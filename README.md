@@ -1,6 +1,7 @@
 ## tasks 
 - add pages/components 
-- add react bootstrap
+- add react bootstrap  
+- optimize 
 
 
 ## overview 
