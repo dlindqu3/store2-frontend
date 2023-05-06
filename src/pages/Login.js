@@ -57,20 +57,22 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         let res2 = await axios.get(req2Url, reqHeaders2)
         console.log("res2 cart: ", res2)
         console.log("cart data: ", res2.data[0]) 
-        setCart(res2.data[0])
 
         // get cart items linked to the given cart
         let getCartItemsUrl = baseURL + "/api/cart_items/" + res2.data[0]["id"]
         let res3 = await axios.get(getCartItemsUrl, reqHeaders2)
         console.log("cart items data: ", res3.data)
-        setCartItems(res3.data)
 
         localStorage.setItem("store2-user", JSON.stringify(store2User))
         // console.log(localStorage.getItem("store2-user"))
+        
         setCurrentUserEmail(store2User["store2Email"])
         setCurrentUsername(store2User["store2Username"])
         setCurrentToken(store2User["store2Token"])
         setCurrentUserId(store2User["store2UserId"])
+        setCart(res2.data[0])
+        setCartItems(res3.data)
+      
         navigate("/all-products")
         
     } catch (error) {

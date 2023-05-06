@@ -2,10 +2,33 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Button } from 'react-bootstrap';
 
 
-function NavbarComponent({ currentUsername, setCurrentUsername }) {
+function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEmail,
+  setCurrentUserId, setCurrentToken, setCart, setCartItems }) {
   let navigate = useNavigate();
+
+  let handleLogout = async () => {
+    try {
+      
+      localStorage.removeItem("store2-user")
+      
+      // set states 
+      setCurrentUsername(null)
+      setCurrentUserEmail(null)
+      setCurrentUserId(null)
+      setCurrentToken(null)
+      setCart(null)
+      setCartItems(null)
+
+      console.log("logout successful")
+      navigate("/")
+
+    } catch (err){
+      console.log("error in logout: ", err)
+    }
+  }
 
   return (
     <Navbar bg="light" expand="lg">
@@ -19,6 +42,13 @@ function NavbarComponent({ currentUsername, setCurrentUsername }) {
               { !currentUsername && <Nav.Link href="/register">Register</Nav.Link> }
               { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
               { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
+              {currentUsername && <Button 
+                onClick={handleLogout} 
+                variant="light" 
+                style={{ marginLeft: "15px" }} >
+                Logout
+              </Button> }
+
           </Nav>
         </Navbar.Collapse>
       </Container>
