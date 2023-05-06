@@ -21,15 +21,16 @@ function App() {
   let checkUserData = async () => {
     let userData = localStorage.getItem("store2-user");
     if (userData){
-      console.log("userData from app.js: ", userData);
+      // console.log("userData from app.js: ", userData);
 
       let userObj = JSON.parse(userData)
+      console.log("userObj from local storage: ", userObj)
   
       let userId = userObj["store2UserId"]
   
       let baseURL = "http://127.0.0.1:8000"
       let getCartUrl = baseURL + "/api/carts/" + userId 
-  
+
       let reqHeaders = {
         headers:{
           "Accept": "application/json",
@@ -41,8 +42,20 @@ function App() {
         const res = await axios.get(getCartUrl, reqHeaders)
         console.log("cart data from app.js useEffect: ", res)
 
-        // set states for currentUsername, currentEmail, currentUserId, currentToken, cart, and cartItems
-        
+        let cartId = res.data[0].id
+        let getCartItemsUrl = baseURL + "/api/cart_items/" + cartId
+
+        const res2 = await axios.get(getCartItemsUrl, reqHeaders)
+        console.log("cart items data from app.js useEffect: ", res2)
+
+        // set states 
+        setCurrentUsername(userObj["store2Username"])
+        setCurrentUserEmail(userObj["store2UserEmail"])
+        setCurrentUserId(userObj["store2UserId"])
+        setCurrentToken(userObj["store2Token"])
+        setCart(res.data[0])
+        setCartItems(res2.data)
+
         } catch (err) {
         if (err.response.data.message === "Unauthenticated."){
           console.log("the user data in local storage has expired")
@@ -56,7 +69,7 @@ function App() {
 
   // runs only on first render 
   useEffect(() => {
-    console.log("useEffect called");
+    console.log("App.js useEffect called");
     checkUserData();
   }, []);
 
@@ -66,8 +79,14 @@ function App() {
         <NavbarComponent
           currentUsername={currentUsername}
           setCurrentUsername={setCurrentUsername}
+          setCurrentUserEmail={setCurrentUserEmail}
+          setCurrentUserId={setCurrentUserId}
+          setCurrentToken={setCurrentToken}
+          setCart={setCart}
+          setCartItems={setCartItems}
         />
         <div>
+          {console.log("page loaded")}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
