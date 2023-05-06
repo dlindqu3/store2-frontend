@@ -15,7 +15,6 @@ function App() {
   const [currentUserId, setCurrentUserId] = useState();
   const [currentToken, setCurrentToken] = useState();
   const [cart, setCart] = useState();
-  const [cartItems, setCartItems] = useState();
 
 
   let checkUserData = async () => {
@@ -40,13 +39,7 @@ function App() {
   
       try {
         const res = await axios.get(getCartUrl, reqHeaders)
-        console.log("cart data from app.js useEffect: ", res)
-
-        let cartId = res.data[0].id
-        let getCartItemsUrl = baseURL + "/api/cart_items/" + cartId
-
-        const res2 = await axios.get(getCartItemsUrl, reqHeaders)
-        console.log("cart items data from app.js useEffect: ", res2)
+        // console.log("cart data from app.js useEffect: ", res)
 
         // set states 
         setCurrentUsername(userObj["store2Username"])
@@ -54,12 +47,14 @@ function App() {
         setCurrentUserId(userObj["store2UserId"])
         setCurrentToken(userObj["store2Token"])
         setCart(res.data[0])
-        setCartItems(res2.data)
+        // console.log("cart data in state from app.js useEffect: ", res.data[0])
 
         } catch (err) {
         if (err.response.data.message === "Unauthenticated."){
           console.log("the user data in local storage has expired")
           localStorage.removeItem("store2-user")
+        } else {
+          console.log("error from App.js useEffect: ", err)
         }
         } 
     } else {
@@ -83,7 +78,6 @@ function App() {
           setCurrentUserId={setCurrentUserId}
           setCurrentToken={setCurrentToken}
           setCart={setCart}
-          setCartItems={setCartItems}
         />
         <div>
           {console.log("page loaded")}
@@ -105,7 +99,6 @@ function App() {
               path="/login"
               element={
                 <Login
-                  setCartItems={setCartItems}
                   setCart={setCart}
                   setCurrentToken={setCurrentToken}
                   setCurrentUsername={setCurrentUsername}
@@ -119,6 +112,7 @@ function App() {
               path="/all-products"
               element={currentUsername ? 
                 <AllProducts                   
+                  cart={cart}
                   setCart={setCart}
                   currentUsername={currentUsername}
                   currentToken={currentToken}

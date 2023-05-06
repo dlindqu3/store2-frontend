@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 
-function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId, setCart, setCartItems }) {
+function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId, setCart }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [signupError, setSignupError] = useState("")
@@ -58,11 +58,6 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         console.log("res2 cart: ", res2)
         console.log("cart data: ", res2.data[0]) 
 
-        // get cart items linked to the given cart
-        let getCartItemsUrl = baseURL + "/api/cart_items/" + res2.data[0]["id"]
-        let res3 = await axios.get(getCartItemsUrl, reqHeaders2)
-        console.log("cart items data: ", res3.data)
-
         localStorage.setItem("store2-user", JSON.stringify(store2User))
         // console.log(localStorage.getItem("store2-user"))
         
@@ -71,7 +66,6 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         setCurrentToken(store2User["store2Token"])
         setCurrentUserId(store2User["store2UserId"])
         setCart(res2.data[0])
-        setCartItems(res3.data)
       
         navigate("/all-products")
         

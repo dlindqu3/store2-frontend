@@ -30,6 +30,7 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
     }
     }  
     getProducts()
+    console.log("cart from allProducts useState: ", cart)
     setIsLoading(false)
   }, []);
 
@@ -38,16 +39,16 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
 
   return (
     <div>
-
-    {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
-    {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
+      {/* {console.log("initial cart from AllProducts: ", cart)} */}
+      {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
+      {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
       <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Products </h2>
 
       {isLoading && <p>Loading...</p>}
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {
-          return <ProductCard productData={item} key={item.id} cart={cart} setCart={setCart} />
+          return <ProductCard currentToken={currentToken} productData={item} key={item.id} cart={cart} setCart={setCart} />
       })}
       </div>
       {errorText && console.log('error text: ', errorText)}

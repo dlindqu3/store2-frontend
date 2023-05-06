@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 
 
 function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEmail,
-  setCurrentUserId, setCurrentToken, setCart, setCartItems }) {
+  setCurrentUserId, setCurrentToken, setCart }) {
   let navigate = useNavigate();
 
   let handleLogout = async () => {
@@ -20,7 +20,6 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
       setCurrentUserId(null)
       setCurrentToken(null)
       setCart(null)
-      setCartItems(null)
 
       console.log("logout successful")
       navigate("/")
