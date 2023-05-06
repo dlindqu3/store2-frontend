@@ -3,9 +3,16 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-function ProductCard({ productData, currentUserId, currentToken, cart, setCart }) {
+function ProductCard({ currentToken, productData, cart, setCart }) {
 
   let baseURL = "http://127.0.0.1:8000"
+
+  let reqHeaders = {
+    headers:{
+      "Accept": "application/json",
+      Authorization: `Bearer ${currentToken}`
+    }
+  }
 
 
   let checkProductInCart = async (cart, product) => {
@@ -13,11 +20,7 @@ function ProductCard({ productData, currentUserId, currentToken, cart, setCart }
     console.log("current cart: ", cart)
     console.log("current product: ", product)
     let productId = product.id 
-    let reqHeaders = {
-      headers:{
-        "Accept": "application/json"
-    }
-  }
+
     let getItemsInCartUrl = baseURL + "/api/cart_items/" + cart.id 
     const res = await axios.get(getItemsInCartUrl, reqHeaders)
     console.log("res.data for items in cart: ", res.data)
@@ -39,14 +42,10 @@ function ProductCard({ productData, currentUserId, currentToken, cart, setCart }
         "product_id": productData.id,
         "quantity": 1
       }
-      let reqHeaders = {
-        headers:{
-          "Accept": "application/json"
-      }
-    }
 
-    // add new cart item 
+    // Add new cart item 
     let res = await axios.post(addNewCartItemUrl, addNewCartItemBody, reqHeaders)
+    console.log("added new cart item: ", res)
 
     let newCartTotalPrice = productData.price + cart.total_cost
 
@@ -56,8 +55,9 @@ function ProductCard({ productData, currentUserId, currentToken, cart, setCart }
 
     let updateCartUrl = baseURL + "/api/carts/" + cart.id
 
-    // update cart total_cost 
+    // Update cart total_cost 
     let res2 = await axios.put(updateCartUrl, updateCartBody, reqHeaders)
+    console.log("updated cart after adding new cartItem: ", res2)
 
     setCart(res2.data)
     return {"newCartItem": res.data, "updatedCart":res2.data}
@@ -71,16 +71,11 @@ function ProductCard({ productData, currentUserId, currentToken, cart, setCart }
     let baseUrl = "http://127.0.0.1:8000/api/cart_items/"
     let currentCartItemUrl = baseUrl + cart.id + "/" + product.id
     console.log("currentCartItemUrl: ", currentCartItemUrl)
-    let reqHeaders = {
-      headers:{
-        "Accept": "application/json"
-      }
-    }
-    let currentCartItem = await axios.get(currentCartItemUrl, reqHeaders)
 
+    let currentCartItem = await axios.get(currentCartItemUrl, reqHeaders)
     console.log("currentCartItem: ", currentCartItem)
     
-    // update currentCartItem.data, quantity + 1 
+    // Update currentCartItem.data: quantity + 1 
     let updateCartItemUrl = "http://127.0.0.1:8000/api/cart_items/" + currentCartItem.data[0].id
 
     let updateCartItemBody = {
@@ -90,39 +85,52 @@ function ProductCard({ productData, currentUserId, currentToken, cart, setCart }
     let updatedCartItem = await axios.put(updateCartItemUrl, updateCartItemBody, reqHeaders)
     console.log("updatedCartItem.data: ", updatedCartItem.data)
 
-    // ADD to cart.total_price for adding existing to cart
+    // Update cart: add to cart.total_price
     let updateCartUrl = "http://127.0.0.1:8000/api/carts/" + cart.id
     let updateCartBody = {
       "total_cost": cart.total_cost + product.price
     }
+
     let updatedCart = await axios.put(updateCartUrl, updateCartBody, reqHeaders)
     console.log("updated cart.data: ", updatedCart.data)
     setCart(updatedCart.data)
   };
 
-  // works so far, can check if item is in cart add new item 
   let handleAddSubmit = async (cart, product) => {
-    let res1 = await checkProductInCart(cart, product)
-    // returns either "false" OR the cart_item object 
-    console.log("res1 from handleAddSubmit: ", res1)
+    let res1;
 
-    if (!res1){
-      let res2 = await handleAddNewToCart(product, cart)
-      console.log("newly added cart item and updated cart: ", res2)
-    } 
-    
-    else if (res1){
-
-      console.log("product already in cart")
-      // update quantity for existing cart object AND update cart's total_cost
-      let res2 = await handleAddExistingToCart(cart, product)
-      // console.log('res2 from handleAddExistingToCart: ', res2.data)
-
+    try {
+      res1 = await checkProductInCart(cart, product)
+      // returns either "false" OR the cart_item object 
+      console.log("res1 from handleAddSubmit: ", res1)
+    } catch (err){
+        console.log("error checking if item in cart: ", err)
     }
-  } 
+
+      if (!res1){
+        try {
+          let res2 = await handleAddNewToCart(product, cart)
+          console.log("newly added cart item and updated cart: ", res2)
+        } catch (err){
+          console.log("error adding new item to cart: ", err)
+        }
+      } 
+      
+      else if (res1){
+        try {
+          console.log("product already in cart")
+          // update quantity for existing cart object AND update cart's total_cost
+          let res2 = await handleAddExistingToCart(cart, product)
+          // console.log('res2 from handleAddExistingToCart: ', res2.data)
+        } catch (err){
+          console.log("error adding existing item to cart: ", err)
+        }
+      }
+    } 
 
   return (
     <div style={{ }}>
+      {/* { console.log("initial cart from ProductCard: ", cart) }  */}
       <Card style={{ maxWidth: "50vh", marginBottom: "3vh", marginTop: "3vh", minHeight: "60vh" }}>
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
