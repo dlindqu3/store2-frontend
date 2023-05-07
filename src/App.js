@@ -7,7 +7,9 @@ import AllProducts from "./pages/AllProducts";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Cart from "./pages/Cart";
 import axios from "axios"
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 function App() {
   const [currentUsername, setCurrentUsername] = useState();
@@ -64,12 +66,13 @@ function App() {
 
   // runs only on first render 
   useEffect(() => {
-    console.log("App.js useEffect called");
+    // console.log("App.js useEffect called");
     checkUserData();
   }, []);
 
   return (
     <div className="App">
+      {console.log("cart from app.js return: ", cart)}
       <BrowserRouter>
         <NavbarComponent
           currentUsername={currentUsername}
@@ -83,28 +86,17 @@ function App() {
           {console.log("page loaded")}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/register"
-              element={
-                <Register
-                  setCart={setCart}
-                  setCurrentToken={setCurrentToken}
-                  setCurrentUsername={setCurrentUsername}
-                  setCurrentUserEmail={setCurrentUserEmail}
-                  setCurrentUserId={setCurrentUserId}
-                />
-              }
-            />
+            <Route path="/register" element={ <Register /> } />
             <Route
               path="/login"
               element={
-                <Login
-                  setCart={setCart}
-                  setCurrentToken={setCurrentToken}
-                  setCurrentUsername={setCurrentUsername}
-                  setCurrentUserEmail={setCurrentUserEmail}
-                  setCurrentUserId={setCurrentUserId}
-                />
+                <Login                 
+                setCart={setCart}
+                setCurrentToken={setCurrentToken}
+                setCurrentUserEmail={setCurrentUserEmail}
+                setCurrentUsername={setCurrentUsername}
+                setCurrentUserId={setCurrentUserId}
+              /> 
               }
             />
 
@@ -123,6 +115,19 @@ function App() {
               }
             /> 
 
+            <Route 
+              path="/cart"
+              element={currentUsername ? 
+                <Cart                  
+                  cart={cart}
+                  setCart={setCart}
+                  currentToken={currentToken}
+                  currentEmail={currentEmail}
+                  currentUserId={currentUserId}
+                /> 
+                : <Login />
+              }
+            /> 
             {/* <Route path="/cart" element={<Cart cart={cart} setCart={setCart} currentUsername={currentUsername} currentToken={currentToken} currentEmail={currentEmail}  currentUserId={currentUserId} />} /> */}
           </Routes>
         </div>
