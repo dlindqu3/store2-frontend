@@ -27,8 +27,8 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
     let reqHeaders = {
       headers:{
         "Accept": "application/json"
+      }
     }
-  }
     
 
     try {
@@ -59,7 +59,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         console.log("cart data: ", res2.data[0]) 
 
         localStorage.setItem("store2-user", JSON.stringify(store2User))
-        // console.log(localStorage.getItem("store2-user"))
+        console.log(localStorage.getItem("store2-user"))
         
         setCurrentUserEmail(store2User["store2Email"])
         setCurrentUsername(store2User["store2Username"])

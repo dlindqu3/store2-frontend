@@ -33,7 +33,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     }
     return false; 
   }
-
+  
   let handleAddNewToCart = async (productData, cart) => {
     let baseUrl = "http://127.0.0.1:8000"
     let addNewCartItemUrl = baseUrl + "/api/cart_items"
@@ -135,6 +135,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
           <Card.Title>{productData.brand}: {productData.name}</Card.Title>
+           <Card.Text>Price: {productData.price}</Card.Text>
            <Card.Text>{productData.description}</Card.Text>
            <Button onClick={() => {handleAddSubmit(cart, productData)}} >ADD</Button>
         </Card.Body>

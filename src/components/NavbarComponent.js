@@ -36,10 +36,14 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="me-auto">
+              
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/all-products">Products</Nav.Link>
+              
               { !currentUsername && <Nav.Link href="/register">Register</Nav.Link> }
               { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
+
+              { currentUsername && <Nav.Link href="/cart">Cart</Nav.Link> }
               { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
               {currentUsername && <Button 
                 onClick={handleLogout} 

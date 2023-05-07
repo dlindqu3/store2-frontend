@@ -10,6 +10,7 @@ function ProductCardHome({ productData }) {
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
           <Card.Title>{productData.brand}: {productData.name}</Card.Title>
+           <Card.Text>Price: {productData.price}</Card.Text>
            <Card.Text>{productData.description}</Card.Text>
         </Card.Body>
       </Card>      
