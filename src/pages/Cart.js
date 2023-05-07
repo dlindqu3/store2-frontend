@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import CartItem from "../components/CartItem";
+import axios from "axios";
 
 function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
 
     const [errorText, setErrorText] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [emptyCartText, setEmptyCartText] = useState(true);
-    const [productsCartItems, setProductsCartItems] = useState(); 
     const [itemsProductsData, setItemsProductsData] = useState(); 
 
     let baseURL = "http://127.0.0.1:8000"
@@ -72,6 +71,30 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
       setIsLoading(false)
     }, []);
 
+    let handleDeleteCart = async (cart) => {
+
+      console.log("cart from handleDeleteCart: ", cart)
+      let deleteCartUrl = baseURL + "/api/carts/" + cart.id
+
+      let res = await axios.delete(deleteCartUrl, reqHeaders)
+      console.log("res from delete cart: ", res)
+      // res.data = 1 means that 1 item was deleted successfully 
+
+      if (res.data === 1){
+        let createCartUrl = baseURL + "/api/carts"
+        let createCartBody = { "user_id": currentUserId }
+        let newCart = await axios.post(createCartUrl, createCartBody, reqHeaders)
+        console.log("newCart.data: ", newCart.data)
+
+        let getNewCartUrl = baseURL + "/api/carts/" + newCart.data.id
+        let fullNewCart = await axios.get(getNewCartUrl, reqHeaders)
+        console.log("fullNewCart.data: ", fullNewCart.data)
+
+        setCart(fullNewCart.data[0])
+        setItemsProductsData(null)
+      }
+    }
+
     return (
         <div>
             <div>Cart Page</div>
@@ -79,12 +102,13 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
             { isLoading ? <p>Loading...</p>: <p></p>}
             {/* { console.log("cart from Cart.js: ", cart)} */}
             {/* { itemsProductsData && <p>{JSON.stringify(itemsProductsData)}</p>} */}
-            { itemsProductsData && Object.keys(itemsProductsData).map((key) => {
-              return <div>
-                      { <CartItem itemProductObj={itemsProductsData[key]} /> }
+            { itemsProductsData && Object.keys(itemsProductsData).map((keyData) => {
+              return <div key={keyData}>
+                      { <CartItem itemProductObj={itemsProductsData[keyData]} /> }
                       <br />
                     </div>
             })}
+            { cart && <div><p>Delete cart: </p><Button onClick={() => {handleDeleteCart(cart)}}>DELETE Cart</Button> </div>}
             { cart && JSON.stringify(cart) }
         </div>
     )
