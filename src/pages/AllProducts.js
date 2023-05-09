@@ -30,7 +30,6 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
     }
     }  
     getProducts()
-    console.log("cart from allProducts useState: ", cart)
     setIsLoading(false)
   }, []);
 
@@ -39,9 +38,6 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
 
   return (
     <div>
-      {/* {console.log("initial cart from AllProducts: ", cart)} */}
-      {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
-      {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
       <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Products </h2>
 
       {isLoading && <p>Loading...</p>}
