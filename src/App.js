@@ -8,8 +8,10 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 import axios from "axios"
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+
 
 function App() {
   const [currentUsername, setCurrentUsername] = useState();
@@ -45,7 +47,7 @@ function App() {
 
         // set states 
         setCurrentUsername(userObj["store2Username"])
-        setCurrentUserEmail(userObj["store2UserEmail"])
+        setCurrentUserEmail(userObj["store2Email"])
         setCurrentUserId(userObj["store2UserId"])
         setCurrentToken(userObj["store2Token"])
         setCart(res.data[0])
@@ -72,7 +74,6 @@ function App() {
 
   return (
     <div className="App">
-      {console.log("cart from app.js return: ", cart)}
       <BrowserRouter>
         <NavbarComponent
           currentUsername={currentUsername}
@@ -83,7 +84,6 @@ function App() {
           setCart={setCart}
         />
         <div>
-          {console.log("page loaded")}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={ <Register /> } />
@@ -128,7 +128,10 @@ function App() {
                 : <Login />
               }
             /> 
-            {/* <Route path="/cart" element={<Cart cart={cart} setCart={setCart} currentUsername={currentUsername} currentToken={currentToken} currentEmail={currentEmail}  currentUserId={currentUserId} />} /> */}
+
+            <Route path="/checkout-success" element={<Success />} />
+            <Route path="/checkout-cancelled" element={<Cancel />} />
+
           </Routes>
         </div>
         <FooterComponent />

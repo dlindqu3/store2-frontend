@@ -1,7 +1,6 @@
 ## tasks 
 - add pages/components 
 - add react bootstrap  
-- fix sanctum tokens 
 
 
 ## overview 
