@@ -10,7 +10,7 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
 
   useEffect(() => {
     //Runs only on the first render
-    let baseURL = "http://127.0.0.1:8000"
+    let baseURL = "https://store2-backend.herokuapp.com"
     let queryUrl = baseURL + '/api/products'
 
     let getProducts = async () => {

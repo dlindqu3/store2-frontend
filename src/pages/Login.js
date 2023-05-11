@@ -6,7 +6,7 @@ import axios from "axios"
 function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setCurrentUserId, setCart }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [signupError, setSignupError] = useState("")
+  const [loginError, setLoginError] = useState("")
   const [displayPassword, setDisplayPassword] = useState(false)
   const [passwordType, setPasswordType] = useState("password")
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +14,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
   let navigate = useNavigate();
 
   const login = async (email, password) => {
-    let baseURL = "http://127.0.0.1:8000"
+    let baseURL = "https://store2-backend.herokuapp.com"
     let loginUrl = baseURL + "/api/user/login"
 
     let getCartUrl = baseURL + "/api/carts/"
@@ -70,7 +70,9 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         navigate("/all-products")
         
     } catch (error) {
-        console.log(error)
+      if (error.response.data.message){
+        setLoginError(error.response.data.message)
+      }
     }
   };
 
@@ -88,7 +90,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
     e.preventDefault();
     // console.log('login handleSubmit called')
     setIsLoading(true)
-    setSignupError("");
+    setLoginError("");
     login(email, password)
     setIsLoading(false)
   };
@@ -133,7 +135,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             </div>
 
             <div >
-              {signupError ? <p>**{signupError}</p> : <p></p>}
+              {loginError ? <p>**{loginError}</p> : <p></p>}
               {isLoading ? <p>Loading...</p> : <p></p>}
             </div>
 
