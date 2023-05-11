@@ -31,9 +31,10 @@ function App() {
   
       let userId = userObj["store2UserId"]
   
-      let baseURL = "http://127.0.0.1:8000"
+      let baseURL = "https://store2-backend.herokuapp.com"
       let getCartUrl = baseURL + "/api/carts/" + userId 
 
+      console.log("get cart url from app.js checkUserData: ", getCartUrl)
       let reqHeaders = {
         headers:{
           "Accept": "application/json",

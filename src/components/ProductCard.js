@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 
 function ProductCard({ currentToken, productData, cart, setCart }) {
 
-  let baseURL = "http://127.0.0.1:8000"
+  let baseURL = "https://store2-backend.herokuapp.com"
 
   let reqHeaders = {
     headers:{
@@ -35,7 +35,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
   }
   
   let handleAddNewToCart = async (productData, cart) => {
-    let baseUrl = "http://127.0.0.1:8000"
+    let baseUrl = "https://store2-backend.herokuapp.com"
     let addNewCartItemUrl = baseUrl + "/api/cart_items"
     let addNewCartItemBody = { 
         "cart_id": cart.id,
@@ -68,7 +68,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
 
     console.log("handleAddExistingToCart called")
 
-    let baseUrl = "http://127.0.0.1:8000/api/cart_items/"
+    let baseUrl = "https://store2-backend.herokuapp.com/api/cart_items/"
     let currentCartItemUrl = baseUrl + cart.id + "/" + product.id
     console.log("currentCartItemUrl: ", currentCartItemUrl)
 
@@ -76,7 +76,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     console.log("currentCartItem: ", currentCartItem)
     
     // Update currentCartItem.data: quantity + 1 
-    let updateCartItemUrl = "http://127.0.0.1:8000/api/cart_items/" + currentCartItem.data[0].id
+    let updateCartItemUrl = "https://store2-backend.herokuapp.com/api/cart_items/" + currentCartItem.data[0].id
 
     let updateCartItemBody = {
       quantity: currentCartItem.data[0].quantity + 1 
@@ -86,7 +86,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     console.log("updatedCartItem.data: ", updatedCartItem.data)
 
     // Update cart: add to cart.total_price
-    let updateCartUrl = "http://127.0.0.1:8000/api/carts/" + cart.id
+    let updateCartUrl = "https://store2-backend.herokuapp.com/api/carts/" + cart.id
     let updateCartBody = {
       "total_cost": cart.total_cost + product.price
     }
