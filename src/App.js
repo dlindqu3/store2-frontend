@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Container from 'react-bootstrap/Container';
 import NavbarComponent from "./components/NavbarComponent";
 import FooterComponent from "./components/FooterComponent";
 import AllProducts from "./pages/AllProducts";
@@ -27,14 +28,14 @@ function App() {
       // console.log("userData from app.js: ", userData);
 
       let userObj = JSON.parse(userData)
-      console.log("userObj from local storage: ", userObj)
+      // console.log("userObj from local storage: ", userObj)
   
       let userId = userObj["store2UserId"]
   
       let baseURL = "https://store2-backend.herokuapp.com"
       let getCartUrl = baseURL + "/api/carts/" + userId 
 
-      console.log("get cart url from app.js checkUserData: ", getCartUrl)
+      // console.log("get cart url from app.js checkUserData: ", getCartUrl)
       let reqHeaders = {
         headers:{
           "Accept": "application/json",
@@ -56,7 +57,7 @@ function App() {
 
         } catch (err) {
         if (err.response.data.message === "Unauthenticated."){
-          console.log("the user data in local storage has expired")
+          // console.log("the user data in local storage has expired")
           localStorage.removeItem("store2-user")
         } else {
           console.log("error from App.js useEffect: ", err)
@@ -85,6 +86,7 @@ function App() {
           setCart={setCart}
         />
         <div>
+        <Container>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={ <Register /> } />
@@ -134,6 +136,7 @@ function App() {
             <Route path="/checkout-cancelled" element={<Cancel />} />
 
           </Routes>
+        </Container>
         </div>
         <FooterComponent />
       </BrowserRouter>

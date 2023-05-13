@@ -21,7 +21,7 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
       setCurrentToken(null)
       setCart(null)
 
-      console.log("logout successful")
+      // console.log("logout successful")
       navigate("/")
 
     } catch (err){

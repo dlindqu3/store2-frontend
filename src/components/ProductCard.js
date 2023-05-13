@@ -17,13 +17,13 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
 
   let checkProductInCart = async (cart, product) => {
     // check for CartItem with given cart_id and product_id
-    console.log("current cart: ", cart)
-    console.log("current product: ", product)
+    // console.log("current cart: ", cart)
+    // console.log("current product: ", product)
     let productId = product.id 
 
     let getItemsInCartUrl = baseURL + "/api/cart_items/" + cart.id 
     const res = await axios.get(getItemsInCartUrl, reqHeaders)
-    console.log("res.data for items in cart: ", res.data)
+    // console.log("res.data for items in cart: ", res.data)
     
     for (let i = 0; i < res.data.length; i++){
       let currentObj = res.data[i]
@@ -45,7 +45,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
 
     // Add new cart item 
     let res = await axios.post(addNewCartItemUrl, addNewCartItemBody, reqHeaders)
-    console.log("added new cart item: ", res)
+    // console.log("added new cart item: ", res)
 
     let newCartTotalPrice = productData.price + cart.total_cost
 
@@ -57,7 +57,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
 
     // Update cart total_cost 
     let res2 = await axios.put(updateCartUrl, updateCartBody, reqHeaders)
-    console.log("updated cart after adding new cartItem: ", res2)
+    // console.log("updated cart after adding new cartItem: ", res2)
 
     setCart(res2.data)
     return {"newCartItem": res.data, "updatedCart":res2.data}
@@ -66,14 +66,14 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
 
   let handleAddExistingToCart = async (cart, product) => {
 
-    console.log("handleAddExistingToCart called")
+    // console.log("handleAddExistingToCart called")
 
     let baseUrl = "https://store2-backend.herokuapp.com/api/cart_items/"
     let currentCartItemUrl = baseUrl + cart.id + "/" + product.id
-    console.log("currentCartItemUrl: ", currentCartItemUrl)
+    // console.log("currentCartItemUrl: ", currentCartItemUrl)
 
     let currentCartItem = await axios.get(currentCartItemUrl, reqHeaders)
-    console.log("currentCartItem: ", currentCartItem)
+    // console.log("currentCartItem: ", currentCartItem)
     
     // Update currentCartItem.data: quantity + 1 
     let updateCartItemUrl = "https://store2-backend.herokuapp.com/api/cart_items/" + currentCartItem.data[0].id
@@ -83,7 +83,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     }
 
     let updatedCartItem = await axios.put(updateCartItemUrl, updateCartItemBody, reqHeaders)
-    console.log("updatedCartItem.data: ", updatedCartItem.data)
+    // console.log("updatedCartItem.data: ", updatedCartItem.data)
 
     // Update cart: add to cart.total_price
     let updateCartUrl = "https://store2-backend.herokuapp.com/api/carts/" + cart.id
@@ -92,7 +92,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     }
 
     let updatedCart = await axios.put(updateCartUrl, updateCartBody, reqHeaders)
-    console.log("updated cart.data: ", updatedCart.data)
+    // console.log("updated cart.data: ", updatedCart.data)
     setCart(updatedCart.data)
   };
 
@@ -102,7 +102,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
     try {
       res1 = await checkProductInCart(cart, product)
       // returns either "false" OR the cart_item object 
-      console.log("res1 from handleAddSubmit: ", res1)
+      // console.log("res1 from handleAddSubmit: ", res1)
     } catch (err){
         console.log("error checking if item in cart: ", err)
     }
@@ -110,7 +110,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
       if (!res1){
         try {
           let res2 = await handleAddNewToCart(product, cart)
-          console.log("newly added cart item and updated cart: ", res2)
+          // console.log("newly added cart item and updated cart: ", res2)
         } catch (err){
           console.log("error adding new item to cart: ", err)
         }
@@ -118,7 +118,7 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
       
       else if (res1){
         try {
-          console.log("product already in cart")
+          // console.log("product already in cart")
           // update quantity for existing cart object AND update cart's total_cost
           let res2 = await handleAddExistingToCart(cart, product)
           // console.log('res2 from handleAddExistingToCart: ', res2.data)
@@ -135,8 +135,8 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
           <Card.Title>{productData.brand}: {productData.name}</Card.Title>
-           <Card.Text>Price: {productData.price}</Card.Text>
            <Card.Text>{productData.description}</Card.Text>
+           <Card.Text>Price: {productData.price}</Card.Text>
            <Button onClick={() => {handleAddSubmit(cart, productData)}} >ADD</Button>
         </Card.Body>
       </Card>      
