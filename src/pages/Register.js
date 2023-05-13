@@ -35,7 +35,7 @@ function Register({ }) {
     try {
 
       const res = await axios.post(queryUrl, reqBody, reqHeaders)
-      console.log("res.Data from signup: ", res.data) 
+      // console.log("res.Data from signup: ", res.data) 
 
       let reqHeaders2 = {
         headers:{
@@ -51,7 +51,7 @@ function Register({ }) {
       // prove that new cart persists 
       let getCartURL = baseURL + "/api/carts/" + res.data.user.id
       const res3 = await axios.get(getCartURL, reqHeaders2) 
-      console.log("new cart data: ", res3.data[0])
+      // console.log("new cart data: ", res3.data[0])
       
       navigate("/login");
 

@@ -24,7 +24,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
     let getCartItemsAndFilteredProducts = async () => {
 
       let getCartItemsUrl = baseURL + "/api/cart_items/" + cart.id
-      console.log("cartItemsUrl: ", getCartItemsUrl)
+      // console.log("cartItemsUrl: ", getCartItemsUrl)
       let cartItems = await axios.get(getCartItemsUrl, reqHeaders)
 
       if (cartItems.data.length < 1){
@@ -63,7 +63,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
         resObj[currentProductId]["user_email"] = currentEmail
       }
 
-      console.log("resObj from cart useEffect: ", resObj)
+      // console.log("resObj from cart useEffect: ", resObj)
       setItemsProductsData(resObj)
     }
 
@@ -74,22 +74,22 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
 
     let handleDeleteCart = async (cart) => {
 
-      console.log("cart from handleDeleteCart: ", cart)
+      // console.log("cart from handleDeleteCart: ", cart)
       let deleteCartUrl = baseURL + "/api/carts/" + cart.id
 
       let res = await axios.delete(deleteCartUrl, reqHeaders)
-      console.log("res from delete cart: ", res)
+      // console.log("res from delete cart: ", res)
       // res.data = 1 means that 1 item was deleted successfully 
 
       if (res.data === 1){
         let createCartUrl = baseURL + "/api/carts"
         let createCartBody = { "user_id": currentUserId }
         let newCart = await axios.post(createCartUrl, createCartBody, reqHeaders)
-        console.log("newCart.data: ", newCart.data)
+        // console.log("newCart.data: ", newCart.data)
 
         let getNewCartUrl = baseURL + "/api/carts/" + newCart.data.id
         let fullNewCart = await axios.get(getNewCartUrl, reqHeaders)
-        console.log("fullNewCart.data: ", fullNewCart.data)
+        // console.log("fullNewCart.data: ", fullNewCart.data)
 
         setCart(fullNewCart.data[0])
         setItemsProductsData(null)
@@ -101,30 +101,40 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
       let reqUrl = baseURL + "/api/checkout"
 
       let reqBody = itemsProductsData
-      console.log("reqBody with email: ", reqBody)
+      // console.log("reqBody with email: ", reqBody)
 
       let checkoutUrl = await axios.post(reqUrl, reqBody, reqHeaders)
-      console.log("checkoutUrl.data: ", checkoutUrl.data)
+      // console.log("checkoutUrl.data: ", checkoutUrl.data)
 
       window.location = checkoutUrl.data
     }
 
     return (
         <div>
-            <div>Cart Page</div>
+            <h3 style={{ textAlign: "center" }}>Cart</h3>
             { emptyCartText && <p>Your cart is empty.</p> }
-            { isLoading ? <p>Loading...</p>: <p></p>}
+            { isLoading ? <p>Loading...</p>: <p></p> }
+            { itemsProductsData && <p>When you proceed to checkout with Stripe, you will be re-directed to another window. For the credit card number of the payment, please enter the number 4242 4242 4242 4242. If you enter this number, Stripe (the payment software used) recognizes that it is a fake payment, and will let you proceed without actually sending any money.</p> } 
             {/* { console.log("cart from Cart.js: ", cart)} */}
             {/* { itemsProductsData && <p>{JSON.stringify(itemsProductsData)}</p>} */}
-            { itemsProductsData && Object.keys(itemsProductsData).map((keyData) => {
-              return <div key={keyData}>
-                      { <CartItem itemProductObj={itemsProductsData[keyData]} /> }
-                      <br />
-                    </div>
-            })}
-            { cart && <div><p>Delete cart: </p><Button onClick={() => {handleDeleteCart(cart)}}>DELETE Cart</Button> </div>}
-            { cart && JSON.stringify(cart) }
-            <Button onClick={handleCheckout}>Checkout</Button>;
+            <div style={{ display: "flex", flexWrap: "wrap", marginTop: "5%" }}>
+              
+              <div style={{ maxWidth: "70%", marginRight: "5%" }}>
+                { itemsProductsData && Object.keys(itemsProductsData).map((keyData) => {
+                  return <div key={keyData}>
+                          { <CartItem itemProductObj={itemsProductsData[keyData]} /> }
+                          <br />
+                        </div>
+                })}
+              </div>
+
+              <div style={{ maxWidth: "20%", display: "flex", flexDirection: "column", marginBottom: "60%", marginLeft: "8%" }}>
+                {/* { cart && JSON.stringify(cart) } */}
+                { cart && <Button onClick={handleCheckout} style={{ width: "200px",  marginBottom: "20px" }}>Checkout</Button> }
+                { cart && <Button onClick={() => {handleDeleteCart(cart)}} style={{ width: "200px" }}>DELETE Cart</Button> }
+              </div>
+
+            </div>
         </div>
     )
 }

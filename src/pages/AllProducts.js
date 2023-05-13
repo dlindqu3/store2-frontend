@@ -42,7 +42,7 @@ function AllProducts({ currentUsername, currentToken, currentEmail, currentUserI
 
       {isLoading && <p>Loading...</p>}
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: "4vh", marginRight: "4vh" }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {
           return <ProductCard currentToken={currentToken} productData={item} key={item.id} cart={cart} setCart={setCart} />
       })}

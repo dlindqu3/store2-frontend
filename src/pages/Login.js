@@ -35,7 +35,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
       
         const res = await axios.post(loginUrl, reqBody, reqHeaders)
-        console.log("res.data: ", res.data) 
+        // console.log("res.data: ", res.data) 
         
         let store2User = {
             store2Email: res.data.user.email,
@@ -55,11 +55,11 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
         // get cart for this user
         let res2 = await axios.get(req2Url, reqHeaders2)
-        console.log("res2 cart: ", res2)
-        console.log("cart data: ", res2.data[0]) 
+        // console.log("res2 cart: ", res2)
+        // console.log("cart data: ", res2.data[0]) 
 
         localStorage.setItem("store2-user", JSON.stringify(store2User))
-        console.log(localStorage.getItem("store2-user"))
+        // console.log(localStorage.getItem("store2-user"))
         
         setCurrentUserEmail(store2User["store2Email"])
         setCurrentUsername(store2User["store2Username"])

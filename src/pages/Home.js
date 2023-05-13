@@ -45,7 +45,7 @@ function Home() {
 
       {isLoading && <p>Loading...</p>}
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginLeft: "4vh", marginRight: "4vh" }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {
           return <ProductCardHome productData={item} key={item.id} />
       })}
