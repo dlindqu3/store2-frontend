@@ -1,7 +1,13 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import React, { useState, useEffect, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
 import NavbarComponent from "./components/NavbarComponent";
 import FooterComponent from "./components/FooterComponent";
 import AllProducts from "./pages/AllProducts";
@@ -11,8 +17,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
-import axios from "axios"
-
+import axios from "axios";
 
 function App() {
   const [currentUsername, setCurrentUsername] = useState();
@@ -20,55 +25,52 @@ function App() {
   const [currentUserId, setCurrentUserId] = useState();
   const [currentToken, setCurrentToken] = useState();
   const [cart, setCart] = useState();
-
+  const [itemsProductsData, setItemsProductsData] = useState();
 
   let checkUserData = async () => {
     let userData = localStorage.getItem("store2-user");
-    if (userData){
+    if (userData) {
       // console.log("userData from app.js: ", userData);
 
-      let userObj = JSON.parse(userData)
+      let userObj = JSON.parse(userData);
       // console.log("userObj from local storage: ", userObj)
-  
-      let userId = userObj["store2UserId"]
-  
-      let baseURL = "https://store2-backend.herokuapp.com"
-      let getCartUrl = baseURL + "/api/carts/" + userId 
+
+      let userId = userObj["store2UserId"];
+
+      let baseURL = "https://store2-backend.herokuapp.com";
+      let getCartUrl = baseURL + "/api/carts/" + userId;
 
       // console.log("get cart url from app.js checkUserData: ", getCartUrl)
       let reqHeaders = {
-        headers:{
-          "Accept": "application/json",
-          Authorization: `Bearer ${userObj["store2Token"]}`
-        }
-      }
-  
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${userObj["store2Token"]}`,
+        },
+      };
+
       try {
-        const res = await axios.get(getCartUrl, reqHeaders)
+        const res = await axios.get(getCartUrl, reqHeaders);
         // console.log("cart data from app.js useEffect: ", res)
 
-        // set states 
-        setCurrentUsername(userObj["store2Username"])
-        setCurrentUserEmail(userObj["store2Email"])
-        setCurrentUserId(userObj["store2UserId"])
-        setCurrentToken(userObj["store2Token"])
-        setCart(res.data[0])
+        // set states
+        setCurrentUsername(userObj["store2Username"]);
+        setCurrentUserEmail(userObj["store2Email"]);
+        setCurrentUserId(userObj["store2UserId"]);
+        setCurrentToken(userObj["store2Token"]);
+        setCart(res.data[0]);
         // console.log("cart data in state from app.js useEffect: ", res.data[0])
-
-        } catch (err) {
-        if (err.response.data.message === "Unauthenticated."){
+      } catch (err) {
+        if (err.response.data.message === "Unauthenticated.") {
           // console.log("the user data in local storage has expired")
-          localStorage.removeItem("store2-user")
+          localStorage.removeItem("store2-user");
         } else {
-          console.log("error from App.js useEffect: ", err)
+          console.log("error from App.js useEffect: ", err);
         }
-        } 
-    } else {
-      console.log("there is no user data in local storage")
-    }
+      }
+    } 
   };
 
-  // runs only on first render 
+  // runs only on first render
   useEffect(() => {
     // console.log("App.js useEffect called");
     checkUserData();
@@ -86,57 +88,75 @@ function App() {
           setCart={setCart}
         />
         <div>
-        <Container>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={ <Register /> } />
-            <Route
-              path="/login"
-              element={
-                <Login                 
-                setCart={setCart}
-                setCurrentToken={setCurrentToken}
-                setCurrentUserEmail={setCurrentUserEmail}
-                setCurrentUsername={setCurrentUsername}
-                setCurrentUserId={setCurrentUserId}
-              /> 
-              }
-            />
+          <Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/login"
+                element={
+                  <Login
+                    setCart={setCart}
+                    setCurrentToken={setCurrentToken}
+                    setCurrentUserEmail={setCurrentUserEmail}
+                    setCurrentUsername={setCurrentUsername}
+                    setCurrentUserId={setCurrentUserId}
+                  />
+                }
+              />
 
-            <Route 
-              path="/all-products"
-              element={currentUsername ? 
-                <AllProducts                   
-                  cart={cart}
-                  setCart={setCart}
-                  currentUsername={currentUsername}
-                  currentToken={currentToken}
-                  currentEmail={currentEmail}
-                  currentUserId={currentUserId}
-                /> 
-                : <Login />
-              }
-            /> 
+              <Route
+                path="/all-products"
+                element={
+                  currentUsername ? (
+                    <AllProducts
+                      cart={cart}
+                      setCart={setCart}
+                      currentUsername={currentUsername}
+                      currentToken={currentToken}
+                      currentEmail={currentEmail}
+                      currentUserId={currentUserId}
+                    />
+                  ) : (
+                    <Login />
+                  )
+                }
+              />
 
-            <Route 
-              path="/cart"
-              element={currentUsername ? 
-                <Cart                  
-                  cart={cart}
-                  setCart={setCart}
-                  currentToken={currentToken}
-                  currentEmail={currentEmail}
-                  currentUserId={currentUserId}
-                /> 
-                : <Login />
-              }
-            /> 
+              <Route
+                path="/cart"
+                element={
+                  currentUsername ? (
+                    <Cart
+                      cart={cart}
+                      setCart={setCart}
+                      currentToken={currentToken}
+                      currentEmail={currentEmail}
+                      currentUserId={currentUserId}
+                      itemsProductsData={itemsProductsData}
+                      setItemsProductsData={setItemsProductsData}
+                    />
+                  ) : (
+                    <Login />
+                  )
+                }
+              />
 
-            <Route path="/checkout-success" element={<Success />} />
-            <Route path="/checkout-cancelled" element={<Cancel />} />
-
-          </Routes>
-        </Container>
+              <Route
+                path="/checkout-success"
+                element={
+                  <Success
+                    cart={cart}
+                    setCart={setCart}
+                    currentToken={currentToken}
+                    currentUserId={currentUserId}
+                    setItemsProductsData={setItemsProductsData}
+                  />
+                }
+              />
+              <Route path="/checkout-cancelled" element={<Cancel />} />
+            </Routes>
+          </Container>
         </div>
         <FooterComponent />
       </BrowserRouter>
