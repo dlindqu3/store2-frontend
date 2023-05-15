@@ -4,7 +4,7 @@ import axios from "axios";
 function Success({  setCart, setItemsProductsData }) {
 
   let getNewCart = async () => {
-
+    // get user data
     let userData = localStorage.getItem("store2-user");
     if (userData) {
       let userObj = JSON.parse(userData);
