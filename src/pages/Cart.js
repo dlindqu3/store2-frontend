@@ -92,6 +92,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
 
         setCart(fullNewCart.data[0])
         setItemsProductsData(null)
+        setEmptyCartText(true)
       }
     }
 
