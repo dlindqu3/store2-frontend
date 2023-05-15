@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from "axios";
 
-function Success({  setCart, setItemsProductsData }) {
+function Success({  cart, setCart, setItemsProductsData }) {
 
   let getNewCart = async () => {
-
+    // get user data from local storage
     let userData = localStorage.getItem("store2-user");
     if (userData) {
       let userObj = JSON.parse(userData);
@@ -26,12 +26,15 @@ function Success({  setCart, setItemsProductsData }) {
       try {
         const res = await axios.get(getCartUrl, reqHeaders)
         console.log("res from get new cart: ", res)
+        console.log("existing cart in state, Success.js: ", cart)
 
-        if (res.data[0] !== cart){
-          // set state 
-          setCart(res.data[0])
-          setItemsProductsData(null);
-        }
+        // test 
+        // if (res.data[0] !== cart){
+        //   // set state 
+        //   // testing
+        //   setCart(res.data[0])
+        //   setItemsProductsData(null);
+        // }
 
       } catch (err) {
         if (err.response.data.message === "Unauthenticated."){
