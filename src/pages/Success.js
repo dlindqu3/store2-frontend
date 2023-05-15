@@ -26,7 +26,6 @@ function Success({  setCart, setItemsProductsData }) {
       try {
         const res = await axios.get(getCartUrl, reqHeaders)
         console.log("res from get new cart: ", res)
-        console.log("existing cart in state, Success.js: ", cart)
 
         // test 
         // if (res.data[0] !== cart){
