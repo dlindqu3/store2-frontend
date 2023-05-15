@@ -24,16 +24,11 @@ function Success({  setCart, setItemsProductsData }) {
       }
 
       try {
+        
         const res = await axios.get(getCartUrl, reqHeaders)
         console.log("res from get new cart: ", res)
-
-        // test 
-        // if (res.data[0] !== cart){
-        //   // set state 
-        //   // testing
-        //   setCart(res.data[0])
-        //   setItemsProductsData(null);
-        // }
+        setCart(res.data[0]);
+        setItemsProductsData(null);
 
       } catch (err) {
         if (err.response.data.message === "Unauthenticated."){
