@@ -29,6 +29,7 @@ function Success({  setCart, setItemsProductsData }) {
 
         if (res.data[0] !== cart){
           // set state 
+          // testing
           setCart(res.data[0])
           setItemsProductsData(null);
         }
