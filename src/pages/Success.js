@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from "axios";
 
-function Success({  cart, setCart, setItemsProductsData }) {
+function Success({  setCart, setItemsProductsData }) {
 
   let getNewCart = async () => {
     // get user data from local storage

@@ -146,7 +146,6 @@ function App() {
                 path="/checkout-success"
                 element={
                   <Success
-                    cart={cart}
                     setCart={setCart}
                     setItemsProductsData={setItemsProductsData}
                   />
