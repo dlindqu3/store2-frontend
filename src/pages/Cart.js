@@ -4,12 +4,11 @@ import CartItem from "../components/CartItem";
 // import getStripe from '../lib/getStripe';
 import axios from "axios";
 
-function Cart({ cart, setCart, currentToken, currentEmail, currentUserId }) {
+function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsProductsData, setItemsProductsData }) {
 
     const [errorText, setErrorText] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [emptyCartText, setEmptyCartText] = useState(true);
-    const [itemsProductsData, setItemsProductsData] = useState(); 
 
     // let stripePublicKey = "pk_test_51M45GLBAbyq1uTMlLDHFCWZo0Gia5zZo2CEGwxUEM6BKk1vCOHzVc3RjC9SsDmn7ALipagsjx0tLd2lmSydLF7lZ00RPUeBum6"
     let baseURL = "https://store2-backend.herokuapp.com"
