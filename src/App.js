@@ -149,7 +149,6 @@ function App() {
                     cart={cart}
                     setCart={setCart}
                     currentToken={currentToken}
-                    currentUserId={currentUserId}
                     setItemsProductsData={setItemsProductsData}
                   />
                 }
