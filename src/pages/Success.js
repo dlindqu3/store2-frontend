@@ -38,7 +38,7 @@ function Success({ cart, setCart, currentToken, currentUserId, setItemsProductsD
   // runs on every render 
   useEffect(() => {
     console.log("Success.js useEffect called");
-    // getNewCart();
+    getNewCart();
     });
 
   return (
