@@ -17,6 +17,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import Orders from "./pages/Orders";
 import axios from "axios";
 
 function App() {
@@ -152,6 +153,15 @@ function App() {
                 }
               />
               <Route path="/checkout-cancelled" element={<Cancel />} />
+              <Route
+                path="/orders"
+                element={
+                  <Orders
+                    currentUserId={currentUserId}
+                    currentToken={currentToken}
+                  />
+                }
+              />
             </Routes>
           </Container>
         </div>
