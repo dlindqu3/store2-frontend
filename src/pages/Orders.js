@@ -46,7 +46,7 @@ function Orders({ currentToken, currentUserId }) {
 
       { orders && console.log("orders state: ", orders) }
       { orders && orders.map((obj) =>{
-        <p key={obj.id}>{obj["total_cost"]}</p>
+        return <p key={obj.id}>{obj["total_cost"]}</p>
       }) }
     </div>
   )
