@@ -44,6 +44,7 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
               { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
 
               { currentUsername && <Nav.Link href="/cart">Cart</Nav.Link> }
+              { currentUsername && <Nav.Link href="/orders">Orders</Nav.Link> }
               { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
               {currentUsername && <Button 
                 onClick={handleLogout} 

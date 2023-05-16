@@ -10,15 +10,14 @@ function Orders({ currentToken, currentUserId }) {
   
 
   let getOrders = async () => {
-    let reqUrl = baseURL + "/api/orders"
-    let reqBody = { "user_id": currentUserId }
+    let reqUrl = baseURL + "/api/orders_for_user/" + currentUserId
     let reqHeaders = {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${currentToken}`,
       },
     };
-    let res = await axios.get(reqUrl, reqBody, reqHeaders)
+    let res = await axios.get(reqUrl, reqHeaders)
     console.log("res from get orders for user: ", res)
   }
 
@@ -27,6 +26,9 @@ function Orders({ currentToken, currentUserId }) {
     console.log("Order.js useEffect called")
     console.log("currentUserId: " + currentUserId)
     console.log("currentToken: " + currentToken)
+
+    // THIS CAUSES A 401 ERROR - UNAUTHORIZED
+    // THIS ALSO CAUSES A MESSAGE: UNAUTHENTICAED.
     getOrders()
     setIsLoading(false); 
   }, [currentToken, currentUserId]);
