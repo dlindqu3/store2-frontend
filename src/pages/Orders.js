@@ -19,6 +19,8 @@ function Orders({ currentToken, currentUserId }) {
     };
     let res = await axios.get(reqUrl, reqHeaders)
     console.log("res from get orders for user: ", res)
+    // res.data is an array of order objects 
+    setOrders(res.data)
   }
 
   // runs only on first render
@@ -37,6 +39,9 @@ function Orders({ currentToken, currentUserId }) {
     <div>
       <div>Orders page here</div>
       { isLoading && <p>Loading...</p> }
+      { orders && orders.map((obj) =>{
+        <p>{JSON.stringify(obj)}</p>
+      })}
     </div>
   )
 }
