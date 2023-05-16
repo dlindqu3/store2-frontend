@@ -9,13 +9,13 @@ function Orders({ currentToken, currentUserId }) {
   let baseURL = "https://store2-backend.herokuapp.com"
   
 
-  let getOrders = async (token, userId) => {
+  let getOrders = async () => {
     let reqUrl = baseURL + "/api/orders"
-    let reqBody = { "user_id": userId }
+    let reqBody = { "user_id": currentUserId }
     let reqHeaders = {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${currentToken}`,
       },
     };
     let res = await axios.get(reqUrl, reqBody, reqHeaders)
@@ -27,7 +27,7 @@ function Orders({ currentToken, currentUserId }) {
     console.log("Order.js useEffect called")
     console.log("currentUserId: " + currentUserId)
     console.log("currentToken: " + currentToken)
-    getOrders(currentToken, currentUserId)
+    getOrders()
     setIsLoading(false); 
   }, [currentToken, currentUserId]);
 
