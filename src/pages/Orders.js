@@ -10,11 +10,11 @@ function Orders({ currentToken, currentUserId }) {
   let baseURL = "https://store2-backend.herokuapp.com"
 
   let reqHeaders = {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${currentToken}`,
-    },
-  };
+    headers:{
+      "Accept": "application/json",
+      Authorization: `Bearer ${currentToken}`
+    }
+  }
 
   let getOrders = async () => {
     let reqUrl = baseURL + "/api/orders_for_user/" + currentUserId
