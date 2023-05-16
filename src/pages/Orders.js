@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
-function Orders({ }) {
+function Orders({ currentToken, currentUserId }) {
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [orders, setOrders] = useState();
 
   let baseURL = "https://store2-backend.herokuapp.com"
   
 
   let getOrders = async (token, userId) => {
-    let reqUrl = baseURL + "/api/orders_for_user"
+    let reqUrl = baseURL + "/api/orders"
     let reqBody = { "user_id": userId }
     let reqHeaders = {
       headers: {
@@ -20,19 +23,19 @@ function Orders({ }) {
   }
 
   // runs only on first render
-  // passing currentUserId and currentToken through props is TOO SLOW
   useEffect(() => {
-    let user = localStorage.getItem("store2-user")
-    let userId = user["store2UserId"]
-    let token = user["store2Token"]
     console.log("Order.js useEffect called")
-    console.log("current user id: " + userId)
-    console.log("current user token: " + token)
-    getOrders(token, userId)
-  }, []);
+    console.log("currentUserId: " + currentUserId)
+    console.log("currentToken: " + currentToken)
+    getOrders(currentToken, currentUserId)
+    setIsLoading(false); 
+  }, [currentToken, currentUserId]);
 
   return (
-    <div>Orders page here</div>
+    <div>
+      <div>Orders page here</div>
+      { isLoading && <p>Loading...</p> }
+    </div>
   )
 }
 

@@ -153,7 +153,7 @@ function App() {
                 }
               />
               <Route path="/checkout-cancelled" element={<Cancel />} />
-              <Route path="/orders" element={ <Orders /> } />
+              <Route path="/orders" element={ <Orders currentToken={currentToken} currentUserId={currentUserId} /> } />
             </Routes>
           </Container>
         </div>
