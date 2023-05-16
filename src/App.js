@@ -158,7 +158,7 @@ function App() {
                 path="/orders"
                 element={
                   currentUsername ? (
-                    <Cart
+                    <Orders
                       currentToken={currentToken}
                       currentUserId={currentUserId}
                     />
