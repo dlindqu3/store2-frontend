@@ -153,15 +153,7 @@ function App() {
                 }
               />
               <Route path="/checkout-cancelled" element={<Cancel />} />
-              <Route
-                path="/orders"
-                element={
-                  <Orders
-                    currentUserId={currentUserId}
-                    currentToken={currentToken}
-                  />
-                }
-              />
+              <Route path="/orders" element={ <Orders /> } />
             </Routes>
           </Container>
         </div>
