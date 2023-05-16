@@ -27,14 +27,43 @@ function Orders({ currentToken, currentUserId }) {
     if (res.data.length > 0){ 
       setNoOrdersText(false); 
     }
+    return res.data
   }
+
+let getOrderItems = async (ordersArr) => {
+
+  let resObj = {}
+
+  for (let i=0; i < ordersArr.length; i++){
+    let currentOrder = ordersArr[i];
+    let currentOrderCost = currentOrder.total_cost
+    let currentOrderTime = currentOrder.created_at
+
+    resObj[i] = {}
+    resObj[i]["totalCost"] = currentOrderCost
+    resObj[i]["time"] = currentOrderTime 
+
+    let reqUrl = baseURL + "/api/order_items_for_order"
+    let reqBody = {
+      "order_id": currentOrder.id
+    }
+    let res = axios.get(reqUrl, reqBody, reqHeaders)
+    console.log("order items for order: ", res.data)
+    resObj[i]["items"] = res.data
+  }
+
+  console.log("resObj from getOrderItems: ", resObj)
+
+}
 
   // runs only on first render
   useEffect(() => {
     console.log("Order.js useEffect called")
-    // THIS CAUSES A 401 ERROR - UNAUTHORIZED
-    // THIS ALSO CAUSES A MESSAGE: UNAUTHENTICAED.
-    getOrders()
+    let ordersArr = [];
+    ordersArr = getOrders()
+    if (ordersArr.length > 0){
+      getOrderItems(ordersArr)
+    }
     setIsLoading(false); 
   }, []);
 
@@ -45,9 +74,12 @@ function Orders({ currentToken, currentUserId }) {
       { isLoading ? <p>Loading...</p>: <p></p> }
 
       { orders && console.log("orders state: ", orders) }
+      { orders && <p>Orders: </p> }
       { orders && orders.map((obj) =>{
         return <p key={obj.id}>{obj["total_cost"]}</p>
       }) }
+
+
     </div>
   )
 }
