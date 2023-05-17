@@ -103,7 +103,7 @@ function Orders({ currentToken, currentUserId }) {
     console.log("resArray from getOrdersAndItems: ", resArray)
 
     // 8. setState with ARRAY  
-
+    setOrdersData(resArray)
   }
 
   // runs only on first render
@@ -127,12 +127,19 @@ function Orders({ currentToken, currentUserId }) {
       {/* <br /> 
       <br />  */}
 
-      {/* { ordersAndItems && Object.keys(ordersAndItems).map((keyData) => {
+      { ordersData && Object.keys(ordersData).map((keyData) => {
         return  <div key={keyData}>
-                  <p>{ordersAndItems[keyData]["total_cost"]}</p>
-                  <p>{ordersAndItems[keyData]["items"][0]}</p>
+                  <p>{ordersData[keyData]["time"]}</p>
+                  <p>{ordersData[keyData]["total_cost"]}</p>
+                  {
+                    ordersData[keyData]["productsAndQuants"].map((item) => {
+                      return <div key={item.name}>
+                              <p>{item.name} x{item.quantity}</p>
+                            </div>
+                    })
+                  }
                 </div>
-      }) } */}
+      }) }
 
     </div>
   )
