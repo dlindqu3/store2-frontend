@@ -130,7 +130,7 @@ function Orders({ currentToken, currentUserId }) {
       { ordersData && Object.keys(ordersData).map((keyData) => {
         return  <div key={keyData}>
                   <p>{ordersData[keyData]["time"]}</p>
-                  <p>{ordersData[keyData]["total_cost"]}</p>
+                  {/* <p>{ordersData[keyData]["totalCost"]}</p> */}
                   {
                     ordersData[keyData]["productsAndQuants"].map((item) => {
                       return <div key={item.name}>
@@ -138,6 +138,7 @@ function Orders({ currentToken, currentUserId }) {
                             </div>
                     })
                   }
+                  <p>Total cost: {ordersData[keyData]["totalCost"]}</p>
                 </div>
       }) }
 
