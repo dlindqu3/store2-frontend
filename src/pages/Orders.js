@@ -34,8 +34,8 @@ function Orders({ currentToken, currentUserId }) {
       let reqUrl2 = baseURL + "/api/order_items_for_order/" + currentOrder.id 
       let res2 = await axios.get(reqUrl2, reqHeaders)
       console.log("res2 order items for order: ", res2.data)
-      for (let j = 0; j < res.data.length; j++){
-        orderItems.push(res.data[j])
+      for (let j = 0; j < res2.data.length; j++){
+        orderItems.push(res2.data[j])
       }
     }
     console.log("all orderItems for user: ", orderItems)
