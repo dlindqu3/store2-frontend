@@ -59,42 +59,42 @@ function Orders({ currentToken, currentUserId }) {
     console.log("filtered products: ", filteredProducts)
 
     // // 5. start empty ARRAY 
-    // let resArray = [];
+    let resArray = [];
 
     // // 6. add OBJECT for each order to ARRAY 
-    // for (let i = 0; i < orders.length; i++){
-    //   resArray.push({
-    //     "orderId": orders[i]["id"],
-    //     "time": orders[i]["created_at"],
-    //     "totalCost": orders[i]["total_cost"],
-    //     "productsAndQuants": []
-    //   })
-    // }
+    for (let i = 0; i < orders.length; i++){
+      resArray.push({
+        "orderId": orders[i]["id"],
+        "time": orders[i]["created_at"],
+        "totalCost": orders[i]["total_cost"],
+        "productsAndQuants": []
+      })
+    }
 
     // // 7. add OBJ to productsAndQuants for each product/orderItem with name, quantity 
-    // for (let i = 0; i < resArray.length; i++){
-    //   let currentOrder = resArray[i];
-    //   let currentOrderId = currentOrder.orderId
-    //   for (let j = 0; j < orderItems.length; j++){
-    //     let currentItem = orderItems[j];
-    //     console.log("current order item: ", currentItem)
-    //     let productQuant = {}
-    //     if (currentItem["order_id"] === currentOrderId){
-    //       productQuant["quantity"] = currentItem["quantity"];
-    //     }
-    //     let currentItemProdId = currentItem.product_id
-    //     for (let k = 0; k < filteredProducts.length; k++){
-    //       let currentProduct = filteredProducts[k];
-    //       if (currentItemProdId === currentProduct.id){
-    //         productQuant["name"] = currentProduct["name"]
-    //       }
-    //     }
+    for (let i = 0; i < resArray.length; i++){
+      let currentOrder = resArray[i];
+      let currentOrderId = currentOrder.orderId
+      for (let j = 0; j < orderItems.length; j++){
+        let currentItem = orderItems[j];
+        console.log("current order item: ", currentItem)
+        let productQuant = {}
+        if (currentItem["order_id"] === currentOrderId){
+          productQuant["quantity"] = currentItem["quantity"];
+        }
+        let currentItemProdId = currentItem.product_id
+        for (let k = 0; k < filteredProducts.length; k++){
+          let currentProduct = filteredProducts[k];
+          if (currentItemProdId === currentProduct.id){
+            productQuant["name"] = currentProduct["name"]
+          }
+        }
 
-    //     currentOrder["productsAndQuants"].push(productQuant)
-    //   }
-    // }
+        currentOrder["productsAndQuants"].push(productQuant)
+      }
+    }
 
-    // console.log("resArray from getOrdersAndItems: ", resArray)
+    console.log("resArray from getOrdersAndItems: ", resArray)
 
     // 8. setState with ARRAY  
 
