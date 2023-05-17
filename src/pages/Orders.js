@@ -52,11 +52,11 @@ function Orders({ currentToken, currentUserId }) {
     console.log("unique products bought: ", uniqueProductIds)
 
     // // 4. get product items with uniqueProductIds array  
-    // let reqUrl3 = baseURL + "/api/products/filter"
-    // let reqBody3 = { "productIds": uniqueProductIds }
-    // let res3 = await axios.post(reqUrl3, reqBody3, reqHeaders)
-    // let filteredProducts = res3.data
-    // console.log("filtered products: ", filteredProducts)
+    let reqUrl3 = baseURL + "/api/products/filter"
+    let reqBody3 = { "productIds": uniqueProductIds }
+    let res3 = await axios.post(reqUrl3, reqBody3, reqHeaders)
+    let filteredProducts = res3.data
+    console.log("filtered products: ", filteredProducts)
 
     // // 5. start empty ARRAY 
     // let resArray = [];
