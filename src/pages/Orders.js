@@ -40,16 +40,16 @@ function Orders({ currentToken, currentUserId }) {
     }
     console.log("all orderItems for user: ", orderItems)
 
-    //DOESN'T WORK 
+    // NEW
     // 3. get all unique product_ids for user
-    // let uniqueProductIds = [];
-    // for (let j = 0; j < orderItems.length; j++){
-    //   let currentOrderItem = orderItems[j];
-    //   if (!uniqueProductIds.includes(currentOrderItem.product_id)){
-    //     uniqueProductIds.push(currentOrderItem.product_id)
-    //   }
-    // }
-    // console.log("unique products bought: ", uniqueProductIds)
+    let uniqueProductIds = [];
+    for (let j = 0; j < orderItems.length; j++){
+      let currentOrderItem = orderItems[j];
+      if (!uniqueProductIds.includes(currentOrderItem.product_id)){
+        uniqueProductIds.push(currentOrderItem.product_id)
+      }
+    }
+    console.log("unique products bought: ", uniqueProductIds)
 
     // // 4. get product items with uniqueProductIds array  
     // let reqUrl3 = baseURL + "/api/products/filter"
