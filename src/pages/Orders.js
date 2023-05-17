@@ -75,22 +75,30 @@ function Orders({ currentToken, currentUserId }) {
     for (let i = 0; i < resArray.length; i++){
       let currentOrder = resArray[i];
       let currentOrderId = currentOrder.orderId
-      for (let j = 0; j < orderItems.length; j++){
-        let currentItem = orderItems[j];
-        console.log("current order item: ", currentItem)
-        let productQuant = {}
-        if (currentItem["order_id"] === currentOrderId){
-          productQuant["quantity"] = currentItem["quantity"];
+
+      let filteredItems = []
+      for (let k = 0; k < orderItems.length; k++){
+        if (orderItems[k].order_id === currentOrderId){
+          filteredItems.push(orderItems[k])
         }
+      }
+
+      for (let j = 0; j < filteredItems.length; j++){
+        let currentItem = filteredItems[j];
+        console.log("current filtered order item: ", currentItem)
+        let productQuant = {}
+        productQuant["quantity"] = currentItem["quantity"];
         let currentItemProdId = currentItem.product_id
         for (let k = 0; k < filteredProducts.length; k++){
           let currentProduct = filteredProducts[k];
           if (currentItemProdId === currentProduct.id){
             productQuant["name"] = currentProduct["name"]
           }
+          console.log("finished productQuant item: ", productQuant)
+          // maybe push here
         }
 
-        currentOrder["productsAndQuants"].push(productQuant)
+        // currentOrder["productsAndQuants"].push(productQuant)
       }
     }
 
