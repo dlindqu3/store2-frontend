@@ -87,18 +87,16 @@ function Orders({ currentToken, currentUserId }) {
         let currentItem = filteredItems[j];
         console.log("current filtered order item: ", currentItem)
         let productQuant = {}
-        productQuant["quantity"] = currentItem["quantity"];
         let currentItemProdId = currentItem.product_id
         for (let k = 0; k < filteredProducts.length; k++){
           let currentProduct = filteredProducts[k];
           if (currentItemProdId === currentProduct.id){
             productQuant["name"] = currentProduct["name"]
+            productQuant["quantity"] = currentItem["quantity"];
           }
           console.log("finished productQuant item: ", productQuant)
-          // maybe push here
+          currentOrder["productsAndQuants"].push(productQuant)
         }
-
-        // currentOrder["productsAndQuants"].push(productQuant)
       }
     }
 
