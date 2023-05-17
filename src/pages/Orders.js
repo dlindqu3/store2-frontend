@@ -93,9 +93,9 @@ function Orders({ currentToken, currentUserId }) {
           if (currentItemProdId === currentProduct.id){
             productQuant["name"] = currentProduct["name"]
             productQuant["quantity"] = currentItem["quantity"];
-          }
-          console.log("finished productQuant item: ", productQuant)
+            console.log("finished productQuant item: ", productQuant)
           currentOrder["productsAndQuants"].push(productQuant)
+          }
         }
       }
     }
