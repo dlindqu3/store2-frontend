@@ -19,12 +19,14 @@ function Orders({ currentToken, currentUserId }) {
 
   let getOrdersAndItems = async () => {    
 
+    // WORKS 
     // 1. get all orders for user 
     let reqUrl1 = baseURL + "/api/orders_for_user/" + currentUserId
     let res = await axios.get(reqUrl1, reqHeaders)
     console.log("orders for user: ", res.data)
     let orders = res.data;
     
+    // DOESN'T WORK 
     // 2. get all order_items for user 
     let orderItems = [];
     for (let i = 0; i < orders.length; i++){
@@ -32,64 +34,67 @@ function Orders({ currentToken, currentUserId }) {
       let reqUrl2 = baseURL + "/api/order_items_for_order/" + currentOrder.id 
       let res2 = await axios.get(reqUrl2, reqHeaders)
       console.log("res2 order items for order: ", res2.data[0])
-      orderItems.push(res2.data[0])
+      for (let j = 0; j < res.data.length; j++){
+        orderItems.push(res.data[j])
+      }
     }
     console.log("all orderItems for user: ", orderItems)
 
+    //DOESN'T WORK 
     // 3. get all unique product_ids for user
-    let uniqueProductIds = [];
-    for (let j = 0; j < orderItems.length; j++){
-      let currentOrderItem = orderItems[j];
-      if (!uniqueProductIds.includes(currentOrderItem.product_id)){
-        uniqueProductIds.push(currentOrderItem.product_id)
-      }
-    }
-    console.log("unique products bought: ", uniqueProductIds)
+    // let uniqueProductIds = [];
+    // for (let j = 0; j < orderItems.length; j++){
+    //   let currentOrderItem = orderItems[j];
+    //   if (!uniqueProductIds.includes(currentOrderItem.product_id)){
+    //     uniqueProductIds.push(currentOrderItem.product_id)
+    //   }
+    // }
+    // console.log("unique products bought: ", uniqueProductIds)
 
-    // 4. get product items with uniqueProductIds array  
-    let reqUrl3 = baseURL + "/api/products/filter"
-    let reqBody3 = { "productIds": uniqueProductIds }
-    let res3 = await axios.post(reqUrl3, reqBody3, reqHeaders)
-    let filteredProducts = res3.data
-    console.log("filtered products: ", filteredProducts)
+    // // 4. get product items with uniqueProductIds array  
+    // let reqUrl3 = baseURL + "/api/products/filter"
+    // let reqBody3 = { "productIds": uniqueProductIds }
+    // let res3 = await axios.post(reqUrl3, reqBody3, reqHeaders)
+    // let filteredProducts = res3.data
+    // console.log("filtered products: ", filteredProducts)
 
-    // 5. start empty ARRAY 
-    let resArray = [];
+    // // 5. start empty ARRAY 
+    // let resArray = [];
 
-    // 6. add OBJECT for each order to ARRAY 
-    for (let i = 0; i < orders.length; i++){
-      resArray.push({
-        "orderId": orders[i]["id"],
-        "time": orders[i]["created_at"],
-        "totalCost": orders[i]["total_cost"],
-        "productsAndQuants": []
-      })
-    }
+    // // 6. add OBJECT for each order to ARRAY 
+    // for (let i = 0; i < orders.length; i++){
+    //   resArray.push({
+    //     "orderId": orders[i]["id"],
+    //     "time": orders[i]["created_at"],
+    //     "totalCost": orders[i]["total_cost"],
+    //     "productsAndQuants": []
+    //   })
+    // }
 
-    // 7. add OBJ to productsAndQuants for each product/orderItem with name, quantity 
-    for (let i = 0; i < resArray.length; i++){
-      let currentOrder = resArray[i];
-      let currentOrderId = currentOrder.orderId
-      for (let j = 0; j < orderItems.length; j++){
-        let currentItem = orderItems[j];
-        console.log("current order item: ", currentItem)
-        let productQuant = {}
-        if (currentItem["order_id"] === currentOrderId){
-          productQuant["quantity"] = currentItem["quantity"];
-        }
-        let currentItemProdId = currentItem.product_id
-        for (let k = 0; k < filteredProducts.length; k++){
-          let currentProduct = filteredProducts[k];
-          if (currentItemProdId === currentProduct.id){
-            productQuant["name"] = currentProduct["name"]
-          }
-        }
+    // // 7. add OBJ to productsAndQuants for each product/orderItem with name, quantity 
+    // for (let i = 0; i < resArray.length; i++){
+    //   let currentOrder = resArray[i];
+    //   let currentOrderId = currentOrder.orderId
+    //   for (let j = 0; j < orderItems.length; j++){
+    //     let currentItem = orderItems[j];
+    //     console.log("current order item: ", currentItem)
+    //     let productQuant = {}
+    //     if (currentItem["order_id"] === currentOrderId){
+    //       productQuant["quantity"] = currentItem["quantity"];
+    //     }
+    //     let currentItemProdId = currentItem.product_id
+    //     for (let k = 0; k < filteredProducts.length; k++){
+    //       let currentProduct = filteredProducts[k];
+    //       if (currentItemProdId === currentProduct.id){
+    //         productQuant["name"] = currentProduct["name"]
+    //       }
+    //     }
 
-        currentOrder["productsAndQuants"].push(productQuant)
-      }
-    }
+    //     currentOrder["productsAndQuants"].push(productQuant)
+    //   }
+    // }
 
-    console.log("resArray from getOrdersAndItems: ", resArray)
+    // console.log("resArray from getOrdersAndItems: ", resArray)
 
     // 8. setState with ARRAY  
 
