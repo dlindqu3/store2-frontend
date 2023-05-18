@@ -138,7 +138,7 @@ function Orders({ currentToken, currentUserId }) {
                 return (
                   <tr key={index}>
                     <td>{ordersData.indexOf(order) + 1}</td>
-                    <td>{order.time}</td>
+                    <td>{order.time.split("T")[0]}</td>
                     <td>
                       {order.productsAndQuants.map((product) => {
                         return (
