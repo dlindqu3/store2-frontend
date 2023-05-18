@@ -11,7 +11,20 @@
 - https://github.com/dlindqu3/store2-backend
 
 
-## image sources
+## walkthrough
+![initial home page image](./public/images/site-walkthrough-1.png)
+![registration - weak password image](./public/images/site-walkthrough-2.png)
+![registration - strong password image](./public/images/site-walkthrough-3.png)
+![products page image](./public/images/site-walkthrough-4.png)
+![cart page image](./public/images/site-walkthrough-5.png)
+![stripe checkout image](./public/images/site-walkthrough-6.png)
+![stripe checkout success image](./public/images/site-walkthrough-7.png)
+![cart empty after checkout success image](./public/images/site-walkthrough-8.png)
+![orders page - one item - image](./public/images/site-walkthrough-9.png)
+![orders page - two items - image](./public/images/site-walkthrough-10.png)
+
+
+## product image sources
 1. Bike image: photo by Robert Bye on Unsplash. 
 2. Coffee mug image: photo by Merve Sehirli Nasir on Unsplash. 
 3. Drums image: photo by David Martin on Unsplash.
