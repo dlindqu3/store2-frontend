@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 
 function Orders({ currentToken, currentUserId }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [noOrdersText, setNoOrdersText] = useState(true);
-  const [ordersData, setOrdersData] = useState();
+  const [ordersData, setOrdersData] = useState(null);
 
   let baseURL = "https://store2-backend.herokuapp.com";
 
@@ -117,8 +115,10 @@ function Orders({ currentToken, currentUserId }) {
   return (
     <div>
       <div>Orders page here</div>
-      { !ordersData.length > 0 && <p>You have not made any orders.</p> }
+      { ordersData && ordersData.length === 0 && <p>You have not made any orders.</p> }
       {isLoading ? <p>Loading...</p> : <p></p>}
+
+      {console.log("ordersData 1: ", ordersData)}
 
       {ordersData && ordersData.length > 0 && console.log("ordersData: ", ordersData)}
 
