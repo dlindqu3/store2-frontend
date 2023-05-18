@@ -4,7 +4,7 @@
 
 
 ## deployed url
-- ADD 
+- https://store2-frontend.vercel.app/
 
 
 ## backend repository on GitHub 
@@ -27,4 +27,4 @@
 7. "Clearing localStorage in javascript?", [link](https://stackoverflow.com/questions/7667958/clearing-localstorage-in-javascript)
 8. "How to trigger useEffects before render in React?", [link](https://stackoverflow.com/questions/63711013/how-to-trigger-useeffects-before-render-in-react)
 9. The Net Ninja, "MERN Authentication Tutorial #16 - Protecting React Routes", [link](https://www.youtube.com/watch?v=to-V-LcsXUU)
-
+10. ByteGrad, "Sticky Footer in React (Best Solution)" [link](https://www.youtube.com/watch?v=pggIVY5eOGM)

@@ -2,7 +2,8 @@ import React from "react";
 
 function FooterComponent() {
   return (
-    <div style={{ position:"absolute", bottom: 0, display:"block", width:"100%" }}>
+    // marginTop: "auto" puts as much distance between current item and one above it as possible
+    <div style={{ marginTop: "auto" }}>
       <div style={{ height: "3rem", backgroundColor: "WhiteSmoke", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ marginRight: "3px", marginTop: "10px" }}>
             <a href="https://github.com/dlindqu3/">

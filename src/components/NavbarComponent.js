@@ -32,17 +32,17 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/">Swifter Store</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="me-auto">
               
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/all-products">Products</Nav.Link>
               
               { !currentUsername && <Nav.Link href="/register">Register</Nav.Link> }
               { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
 
+              { currentUsername && <Nav.Link href="/all-products">Products</Nav.Link> } 
               { currentUsername && <Nav.Link href="/cart">Cart</Nav.Link> }
               { currentUsername && <Nav.Link href="/orders">Orders</Nav.Link> }
               { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
