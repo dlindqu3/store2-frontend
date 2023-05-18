@@ -2,7 +2,7 @@ import React from "react";
 
 function FooterComponent() {
   return (
-    <div>
+    <div style={{ position:"absolute", bottom: 0, display:"block", width:"100%" }}>
       <div style={{ height: "3rem", backgroundColor: "WhiteSmoke", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ marginRight: "3px", marginTop: "10px" }}>
             <a href="https://github.com/dlindqu3/">

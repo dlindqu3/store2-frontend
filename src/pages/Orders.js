@@ -114,13 +114,13 @@ function Orders({ currentToken, currentUserId }) {
 
   return (
     <div>
-      <div>Orders page here</div>
+      <h3 style={{ textAlign: "center" }}>Orders</h3>
       { ordersData && ordersData.length === 0 && <p>You have not made any orders.</p> }
       {isLoading ? <p>Loading...</p> : <p></p>}
 
-      {console.log("ordersData 1: ", ordersData)}
+      {/* {console.log("ordersData 1: ", ordersData)} */}
 
-      {ordersData && ordersData.length > 0 && console.log("ordersData: ", ordersData)}
+      {/* {ordersData && ordersData.length > 0 && console.log("ordersData: ", ordersData)} */}
 
       {ordersData && ordersData.length > 0 && (
         <Table striped bordered hover>
