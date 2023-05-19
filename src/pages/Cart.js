@@ -130,7 +130,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
 
               <div style={{ maxWidth: "20%", display: "flex", flexDirection: "column", marginBottom: "60%", marginLeft: "8%" }}>
                 {/* { cart && JSON.stringify(cart) } */}
-                {cart && console.log("cart: ", cart)}
+                {/* {cart && console.log("cart: ", cart)} */}
                 { !emptyCartText && <Button onClick={handleCheckout} style={{ width: "200px",  marginBottom: "20px" }}>Checkout</Button> }
                 { !emptyCartText && <Button onClick={() => {handleDeleteCart(cart)}} style={{ width: "200px" }}>DELETE Cart</Button> }
               </div>

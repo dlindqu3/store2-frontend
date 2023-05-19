@@ -105,7 +105,7 @@ function Orders({ currentToken, currentUserId }) {
 
   // runs only on first render
   useEffect(() => {
-    console.log("Order.js useEffect called");
+    // console.log("Order.js useEffect called");
     getOrdersAndItems();
     setIsLoading(false);
   }, []);

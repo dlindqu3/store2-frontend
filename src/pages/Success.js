@@ -14,7 +14,7 @@ function Success({  setCart, setItemsProductsData }) {
       // get new cart 
       let baseURL = "https://store2-backend.herokuapp.com"
       let getCartUrl = baseURL + "/api/carts/" + userId 
-      console.log("get new cart url: ", getCartUrl)
+      // console.log("get new cart url: ", getCartUrl)
     
       let reqHeaders = {
         headers:{
@@ -26,7 +26,7 @@ function Success({  setCart, setItemsProductsData }) {
       try {
         
         const res = await axios.get(getCartUrl, reqHeaders)
-        console.log("res from get new cart: ", res)
+        // console.log("res from get new cart: ", res)
         setCart(res.data[0]);
         setItemsProductsData(null);
 
@@ -43,7 +43,7 @@ function Success({  setCart, setItemsProductsData }) {
 
   // runs on first render 
   useEffect(() => {
-    console.log("Success.js useEffect called");
+    // console.log("Success.js useEffect called");
     getNewCart();
     }, []);
 
