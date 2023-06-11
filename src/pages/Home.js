@@ -35,15 +35,13 @@ function Home() {
   }, []);
 
 
+  // if (isLoading){
+  //   return <p>Loading...</p>
+  // }
 
   return (
     <div>
-
-    {/* { currentUser && console.log(currentUser, ' currentUser from AllProducts')} */}
-    {/* {currentToken && console.log(currentToken, ' currentToken from allProducts')} */}
-      <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>Home</h2>
-
-      {isLoading && <p>Loading...</p>}
+      <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }} data-testid="headerTestId">Home</h2>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {

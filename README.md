@@ -29,6 +29,11 @@
 2. Coffee mug image: photo by Merve Sehirli Nasir on Unsplash. 
 3. Drums image: photo by David Martin on Unsplash.
 4. Ukulele image: Photo by Joints Creative on Unsplash.
+
+
+## run locally 
+- npm start 
+- npm test 
   
 
 ## citations 
