@@ -1,4 +1,5 @@
 import { rest } from "msw";
+import { products } from "./responses";
 
 export const handlers = [
   // useEffect get all products
@@ -7,31 +8,8 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: {
-          "id": 1, 
-          "name": "Leanne Graham"
-        }
+        data: products
       })
-    )
-  }),
-
-  // button get all users
-    // req, res, context 
-  rest.get("https://jsonplaceholder.typicode.com/users", (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      // this array will be appended to an obj like { data: [ ] }
-      ctx.json([
-          {
-            "id": 1, 
-            "name": "Leanne Graham"
-          },
-          {
-            "id": 2, 
-            "name": "Ervin Howell"
-          }
-        ]
-      )
     )
   })
 ]

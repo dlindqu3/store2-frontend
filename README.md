@@ -54,3 +54,4 @@
 11. The Net Ninja, "React Testing Library Tutorial #12 - Finding Async Elements with FindBy" [link](https://www.youtube.com/watch?v=V2wWLM8VX5k)
 12. TechCheck, "React Testing Library - Mock API Calls - Mock Service Worker (msw)" [link](https://www.youtube.com/watch?v=oMv2eAGWtZU)
 13. Stack Overflow, "react-testing-library why is toBeInTheDocument() not a function" [link](https://stackoverflow.com/questions/56547215/react-testing-library-why-is-tobeinthedocument-not-a-function)
+14. Stack Overflow, "react jest mock useNavigate()" [link](https://stackoverflow.com/questions/66284286/react-jest-mock-usenavigate)

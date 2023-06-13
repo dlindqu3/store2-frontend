@@ -22,7 +22,7 @@ function Home() {
           "Accept": "application/json"
         }
       })
-
+      console.log("resData from home useEffect: ", resData); 
       let productsArray = resData.data
       setProducts(productsArray)
     } catch (err){
@@ -35,14 +35,12 @@ function Home() {
   }, []);
 
 
-  // if (isLoading){
-  //   return <p>Loading...</p>
-  // }
-
   return (
     <div>
       <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }} data-testid="headerTestId">Home</h2>
-
+      
+      {/* { products && <p data-testid="description1"> { products[0]["description"] }</p> } */}
+      
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', marginLeft: "4vh", marginRight: "4vh" }}>
       {products && products.map((item) => {
           return <ProductCardHome productData={item} key={item.id} />
