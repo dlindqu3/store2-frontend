@@ -34,7 +34,12 @@
 ## run locally 
 - npm start 
 - npm test 
-  
+
+
+## testing notes 
+- using mock service workers mimics calls to an API without actually making those requests
+- So it is cheaper, faster, and more reliable than calling your actual APIs during testing
+
 
 ## citations 
 1. The Net Ninja, "MERN Stack Tutorial #8 - Making a React App", [link](https://www.youtube.com/watch?v=bx4nk7kBS10&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&index=8)
@@ -46,3 +51,7 @@
 8. "How to trigger useEffects before render in React?", [link](https://stackoverflow.com/questions/63711013/how-to-trigger-useeffects-before-render-in-react)
 9. The Net Ninja, "MERN Authentication Tutorial #16 - Protecting React Routes", [link](https://www.youtube.com/watch?v=to-V-LcsXUU)
 10. ByteGrad, "Sticky Footer in React (Best Solution)" [link](https://www.youtube.com/watch?v=pggIVY5eOGM)
+11. The Net Ninja, "React Testing Library Tutorial #12 - Finding Async Elements with FindBy" [link](https://www.youtube.com/watch?v=V2wWLM8VX5k)
+12. TechCheck, "React Testing Library - Mock API Calls - Mock Service Worker (msw)" [link](https://www.youtube.com/watch?v=oMv2eAGWtZU)
+13. Stack Overflow, "react-testing-library why is toBeInTheDocument() not a function" [link](https://stackoverflow.com/questions/56547215/react-testing-library-why-is-tobeinthedocument-not-a-function)
+14. Stack Overflow, "react jest mock useNavigate()" [link](https://stackoverflow.com/questions/66284286/react-jest-mock-usenavigate)

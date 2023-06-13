@@ -106,6 +106,7 @@ function Register({ }) {
             <label >Email:</label>
             <div >
               <input
+                data-testid="email-field"
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -140,7 +141,9 @@ function Register({ }) {
             </div>
 
             <div >
-              <button >
+              <button 
+                 data-testid="submit-button"
+              >
                 Submit
               </button>
             </div>
