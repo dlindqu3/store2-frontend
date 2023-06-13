@@ -96,6 +96,7 @@ function Register({ }) {
             <label >Username:</label>
             <div >
               <input
+                data-testid="username-field"
                 type="text"
                 onChange={(e) => {
                   setUsername(e.target.value);
@@ -117,6 +118,7 @@ function Register({ }) {
             <label >Password:</label>
             <div>
               <input
+                data-testid="password-field"
                 type={passwordType}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -136,7 +138,7 @@ function Register({ }) {
             </div>
 
             <div >
-              {signupError ? <p>**{signupError}</p> : <p></p>}
+              { signupError ? <p data-testid="signup-error">**{signupError}</p> : <p></p> }
               {isLoading ? <p>Loading...</p> : <p></p>}
             </div>
 

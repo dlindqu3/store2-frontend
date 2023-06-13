@@ -70,9 +70,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         navigate("/all-products")
         
     } catch (error) {
-      if (error.response.data.message){
-        setLoginError(error.response.data.message)
-      }
+      setLoginError("Please try again with a valid email and password.")
     }
   };
 
@@ -117,6 +115,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             <label >Password:</label>
             <div>
               <input
+                data-testid="password-field"
                 type={passwordType}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -136,7 +135,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             </div>
 
             <div >
-              {loginError ? <p>**{loginError}</p> : <p></p>}
+              {loginError ? <p data-testid="login-error">**{loginError}</p> : <p></p>}
               {isLoading ? <p>Loading...</p> : <p></p>}
             </div>
 
