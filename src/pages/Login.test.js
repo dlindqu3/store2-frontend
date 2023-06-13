@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import { Router } from 'react-router-dom';
 import Login from './Login';
 import { BrowserRouter } from 'react-router-dom';
-
+import userEvent from '@testing-library/user-event';
 
 // jest.requireActual(moduleName)
 // Returns the actual module instead of a mock, bypassing all checks on whether the module should receive a mock implementation or not.
@@ -34,4 +33,64 @@ test('it should have a submit button', () => {
     const element = screen.getByTestId("submit-button");
     expect(element).toBeInTheDocument(); 
 });
-  
+
+test('it should display an error if there is no email or password provided on submit', async () => {
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  )
+  const buttonElement = screen.getByTestId("submit-button"); 
+  userEvent.click(buttonElement);
+  // watch for p tag with data-testid="login-error"
+  const errorElement = await screen.findByTestId("login-error"); 
+  expect(errorElement).toBeInTheDocument(); 
+});
+
+test('it should display an error if the email does not include text@text', async () => {
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  )
+
+  // add a bad email 
+    // need "text@text" to pass 
+  const emailElement = screen.getByTestId("email-field"); 
+  userEvent.type(emailElement, "batman@"); 
+
+  // add a valid password
+  const passwordElement = screen.getByTestId("password-field");
+  userEvent.type(passwordElement, "Gotham@55"); 
+
+  const buttonElement = screen.getByTestId("submit-button"); 
+  userEvent.click(buttonElement);
+
+  // watch for p tag with data-testid="login-error"
+  const errorElement = await screen.findByTestId("login-error"); 
+  expect(errorElement).toBeInTheDocument(); 
+});
+
+test('it should display an error if the password is not at least 8 characters', async () => {
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  )
+
+  // add a valid email 
+    // need "text@text" to pass 
+  const emailElement = screen.getByTestId("email-field"); 
+  userEvent.type(emailElement, "batman55@gmail.com"); 
+
+  // add an invalid password, under 8 characters 
+  const passwordElement = screen.getByTestId("password-field");
+  userEvent.type(passwordElement, "Gotham"); 
+
+  const buttonElement = screen.getByTestId("submit-button"); 
+  userEvent.click(buttonElement);
+
+  // watch for p tag with data-testid="login-error"
+  const errorElement = await screen.findByTestId("login-error"); 
+  expect(errorElement).toBeInTheDocument(); 
+});
