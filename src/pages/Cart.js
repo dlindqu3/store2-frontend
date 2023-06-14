@@ -111,7 +111,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
 
     return (
         <div>
-            <h3 style={{ textAlign: "center" }}>Cart</h3>
+            <h3 data-testid="cart-header" style={{ textAlign: "center" }}>Cart</h3>
             { emptyCartText && <p>Your cart is empty.</p> }
             { isLoading ? <p>Loading...</p>: <p></p> }
             { itemsProductsData && <p>When you proceed to checkout with Stripe, you will be re-directed to another window. For the credit card number of the payment, please enter the number 4242 4242 4242 4242. If you enter this number, Stripe (the payment software used) recognizes that it is a fake payment, and will let you proceed without actually sending any money.</p> } 
