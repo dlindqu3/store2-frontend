@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import { Router } from 'react-router-dom';
 import Register from "./Register";
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
