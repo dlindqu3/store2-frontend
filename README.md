@@ -24,6 +24,10 @@
 ![orders page - two items - image](./public/images/site-walkthrough-10.png)
 
 
+## jest testing results 
+![jest testing - image](./public/images/jest-screenshot.png)
+
+
 ## product image sources
 1. Bike image: photo by Robert Bye on Unsplash. 
 2. Coffee mug image: photo by Merve Sehirli Nasir on Unsplash. 
