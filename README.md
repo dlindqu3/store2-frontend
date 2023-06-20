@@ -36,8 +36,16 @@
 
 
 ## run locally 
-- npm start 
-- npm test 
+- app: 
+  - npm start 
+- jest: 
+  - npm test 
+- cypress: 
+  - run app in one terminal (npm start)
+  - run cypress in another terminal (npx cypress open)
+    - select "E2E Testing"
+    - select your browser 
+    - select spec file you want to run 
 
 
 ## testing notes 
@@ -62,3 +70,4 @@
 15. Yogesh Chavan, "React Testing Library Tutorial – How to Write Unit Tests for React Apps" [link](https://www.freecodecamp.org/news/write-unit-tests-using-react-testing-library/)
 16. Cypress, "Writing Your First E2E Test" [link](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test)
 17. Cypress, "Installing Cypress and writing your first test" [link](https://learn.cypress.io/testing-your-first-application/installing-cypress-and-writing-your-first-test)
+18. Stack Overflow, "Storing an array of elements using Cypress" [link](https://stackoverflow.com/questions/61196857/storing-an-array-of-elements-using-cypress)
