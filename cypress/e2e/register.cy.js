@@ -31,10 +31,15 @@ describe('tests layout and functionality of Register page', () => {
     cy.get("[data-testid='email-field']").type(`${randomStrings[1]}@gmail.com`)
     cy.get("[data-testid='password-field']").type(`gotham@${randomStrings[2]}`)
     cy.get("[data-testid='submit-button']").click() 
+    cy.url().should('include', '/login')
 
     // sends POST request to url: https://store2-backend.herokuapp.com/api/user/register
     // redirects  to /login if registration is successful 
   })
 
+  // sample registered user: 
+  // username: batman85
+  // email: batman85@gmail.com
+  // password: Green@55
 
 })
