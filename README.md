@@ -71,3 +71,4 @@
 16. Cypress, "Writing Your First E2E Test" [link](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test)
 17. Cypress, "Installing Cypress and writing your first test" [link](https://learn.cypress.io/testing-your-first-application/installing-cypress-and-writing-your-first-test)
 18. Stack Overflow, "Storing an array of elements using Cypress" [link](https://stackoverflow.com/questions/61196857/storing-an-array-of-elements-using-cypress)
+19. Rahman Fadhil, "How to Generate Unique ID in JavaScript" [link](https://dev.to/rahmanfadhil/how-to-generate-unique-id-in-javascript-1b13)
