@@ -1,7 +1,5 @@
 
-// run app in one terminal, cypress in another (can create multiple terminals in vs code)
-
-describe('tests data retrieval and layout of Home page', () => {
+describe('tests layout and functionality of Home page', () => {
   it('contains an h2 with the correct text', () => {
     cy.visit("http://localhost:3000")
     cy.get("[data-testid='headerTestId']").contains("Home")
