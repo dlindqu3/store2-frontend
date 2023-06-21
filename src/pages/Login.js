@@ -33,9 +33,8 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
     try {
 
-      
         const res = await axios.post(loginUrl, reqBody, reqHeaders)
-        // console.log("res.data: ", res.data) 
+        console.log("res.data from login post req: ", res.data) 
         
         let store2User = {
             store2Email: res.data.user.email,
@@ -45,6 +44,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
         }
 
         let req2Url = getCartUrl + res.data.user.id
+        console.log("get cart url: ", req2Url)
 
         let reqHeaders2 = {
           headers:{
@@ -55,8 +55,8 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
         // get cart for this user
         let res2 = await axios.get(req2Url, reqHeaders2)
-        // console.log("res2 cart: ", res2)
-        // console.log("cart data: ", res2.data[0]) 
+        console.log("res2 data from login: ", res2)
+        console.log("cart data from login: ", res2.data[0]) 
 
         localStorage.setItem("store2-user", JSON.stringify(store2User))
         // console.log(localStorage.getItem("store2-user"))
@@ -104,7 +104,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             <label >Email:</label>
             <div >
               <input
-                data-testid="email-field"
+                data-testid="login-email-field"
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -115,7 +115,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
             <label >Password:</label>
             <div>
               <input
-                data-testid="password-field"
+                data-testid="login-password-field"
                 type={passwordType}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -141,7 +141,7 @@ function Login ({ setCurrentUsername, setCurrentToken, setCurrentUserEmail, setC
 
             <div >
               <button 
-                data-testid="submit-button"
+                data-testid="login-submit-button"
               >
                 Submit
               </button>

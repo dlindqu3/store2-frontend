@@ -135,9 +135,9 @@ function ProductCard({ currentToken, productData, cart, setCart }) {
         <Card.Img variant="top" src={productData.image} />
         <Card.Body>
           <Card.Title>{productData.brand}: {productData.name}</Card.Title>
-           <Card.Text>{productData.description}</Card.Text>
+           <Card.Text data-testid="all-products-product-description">{productData.description}</Card.Text>
            <Card.Text>Price: {productData.price}</Card.Text>
-           <Button onClick={() => {handleAddSubmit(cart, productData)}} >ADD</Button>
+           <Button onClick={() => {handleAddSubmit(cart, productData)}} data-testid="add-product-button" >ADD</Button>
         </Card.Body>
       </Card>      
     </div>
