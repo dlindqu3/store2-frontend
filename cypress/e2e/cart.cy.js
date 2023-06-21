@@ -1,10 +1,7 @@
-// import { uuid } from 'uuidv4';
-
 // best practice is to use beforeEach to do logins, cleanup 
 // Cypress automatically clears all local storage before each test to prevent state from being shared across tests when test isolation is enabled.
 
 describe('tests layout and functionality of cart page', () => {
-  // let randomStrings = uuid().split("-")
 
   beforeEach(() => {
     cy.log("cart.cy.js before each running...")
