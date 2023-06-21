@@ -35,7 +35,7 @@ function Register({ }) {
     try {
 
       const res = await axios.post(queryUrl, reqBody, reqHeaders)
-      // console.log("res.Data from signup: ", res.data) 
+      console.log("res.Data from register: ", res.data) 
 
       let reqHeaders2 = {
         headers:{
@@ -46,12 +46,12 @@ function Register({ }) {
 
       // create new cart with new user's id 
       const res2 = await axios.post(createCartUrl, { "user_id": res.data.user.id }, reqHeaders2)
-      // console.log("cart created res2.data: ", res2.data)
+      console.log("cart created res2.data: ", res2.data)
 
       // prove that new cart persists 
       let getCartURL = baseURL + "/api/carts/" + res.data.user.id
       const res3 = await axios.get(getCartURL, reqHeaders2) 
-      // console.log("new cart data: ", res3.data[0])
+      console.log("new cart data: ", res3.data[0])
       
       navigate("/login");
 
@@ -96,7 +96,7 @@ function Register({ }) {
             <label >Username:</label>
             <div >
               <input
-                data-testid="username-field"
+                data-testid="register-username-field"
                 type="text"
                 onChange={(e) => {
                   setUsername(e.target.value);
@@ -107,7 +107,7 @@ function Register({ }) {
             <label >Email:</label>
             <div >
               <input
-                data-testid="email-field"
+                data-testid="register-email-field"
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -118,7 +118,7 @@ function Register({ }) {
             <label >Password:</label>
             <div>
               <input
-                data-testid="password-field"
+                data-testid="register-password-field"
                 type={passwordType}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -138,13 +138,13 @@ function Register({ }) {
             </div>
 
             <div >
-              { signupError ? <p data-testid="signup-error">**{signupError}</p> : <p></p> }
+              { signupError ? <p data-testid="register-error">**{signupError}</p> : <p></p> }
               {isLoading ? <p>Loading...</p> : <p></p>}
             </div>
 
             <div >
               <button 
-                 data-testid="submit-button"
+                 data-testid="register-submit-button"
               >
                 Submit
               </button>

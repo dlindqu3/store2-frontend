@@ -22,6 +22,7 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
 
     let getCartItemsAndFilteredProducts = async () => {
 
+      console.log("cart: ", cart); 
       let getCartItemsUrl = baseURL + "/api/cart_items/" + cart.id
       // console.log("cartItemsUrl: ", getCartItemsUrl)
       let cartItems = await axios.get(getCartItemsUrl, reqHeaders)
@@ -112,13 +113,11 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
     return (
         <div>
             <h3 data-testid="cart-header" style={{ textAlign: "center" }}>Cart</h3>
-            { emptyCartText && <p>Your cart is empty.</p> }
+            { emptyCartText && <p data-testid="empty-cart">Your cart is empty.</p> }
             { isLoading ? <p>Loading...</p>: <p></p> }
             { itemsProductsData && <p>When you proceed to checkout with Stripe, you will be re-directed to another window. For the credit card number of the payment, please enter the number 4242 4242 4242 4242. If you enter this number, Stripe (the payment software used) recognizes that it is a fake payment, and will let you proceed without actually sending any money.</p> } 
-            {/* { console.log("cart from Cart.js: ", cart)} */}
-            {/* { itemsProductsData && <p>{JSON.stringify(itemsProductsData)}</p>} */}
-            <div style={{ display: "flex", flexWrap: "wrap", marginTop: "5%" }}>
-              
+
+            <div style={{ display: "flex", flexWrap: "wrap", marginTop: "5%" }}>        
               <div style={{ maxWidth: "70%", marginRight: "5%" }}>
                 { itemsProductsData && Object.keys(itemsProductsData).map((keyData) => {
                   return <div key={keyData}>
@@ -129,12 +128,10 @@ function Cart({ cart, setCart, currentToken, currentEmail, currentUserId, itemsP
               </div>
 
               <div style={{ maxWidth: "20%", display: "flex", flexDirection: "column", marginBottom: "60%", marginLeft: "8%" }}>
-                {/* { cart && JSON.stringify(cart) } */}
-                {/* {cart && console.log("cart: ", cart)} */}
+                {cart && console.log("cart: ", cart)}
                 { !emptyCartText && <Button onClick={handleCheckout} style={{ width: "200px",  marginBottom: "20px" }}>Checkout</Button> }
-                { !emptyCartText && <Button onClick={() => {handleDeleteCart(cart)}} style={{ width: "200px" }}>DELETE Cart</Button> }
+                { !emptyCartText && <Button onClick={() => {handleDeleteCart(cart)}} style={{ width: "200px" }} data-testid="delete-cart-button">DELETE Cart</Button> }
               </div>
-
             </div>
         </div>
     )

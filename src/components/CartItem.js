@@ -4,7 +4,7 @@ function CartItem({ itemProductObj }) {
 
 
   return (
-    <div>
+    <div data-testid="cart-item-card">
         {/* { itemProductObj && console.log("itemProductObj: ", itemProductObj) } */}
         <div style={{ height: "2px", background: "black", marginLeft: "20px", marginRight: "20px", marginBottom: "5px" }}></div>
         <div style={{ height: "2px", background: "black", marginLeft: "30px", marginRight: "30px", marginBottom: "5px" }}></div>

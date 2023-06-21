@@ -37,16 +37,17 @@ function NavbarComponent({ currentUsername, setCurrentUsername, setCurrentUserEm
         <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="me-auto">
               
-              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/" data-testid="home-link">Home</Nav.Link>
               
               { !currentUsername && <Nav.Link href="/register">Register</Nav.Link> }
               { !currentUsername && <Nav.Link href="/login">Login</Nav.Link> }
 
-              { currentUsername && <Nav.Link href="/all-products">Products</Nav.Link> } 
-              { currentUsername && <Nav.Link href="/cart">Cart</Nav.Link> }
+              { currentUsername && <Nav.Link href="/all-products" data-testid="all-products-link">Products</Nav.Link> } 
+              { currentUsername && <Nav.Link href="/cart" data-testid="cart-link">Cart</Nav.Link> }
               { currentUsername && <Nav.Link href="/orders">Orders</Nav.Link> }
               { currentUsername && <Navbar.Text> Signed in as: { currentUsername } </Navbar.Text> }
-              {currentUsername && <Button 
+              {currentUsername && <Button
+                data-testid="logout-button" 
                 onClick={handleLogout} 
                 variant="light" 
                 style={{ marginLeft: "15px" }} >
