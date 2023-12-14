@@ -26,7 +26,7 @@ describe('tests layout and functionality of cart page', () => {
   })
 
 
-  it('shows the current cart for a logged-inj', () => {
+  it('shows the current cart for a logged-in user', () => {
      // login user
      cy.visit("http://localhost:3000/login")
      cy.get("[data-testid='login-email-field']").type("batman00@gmail.com")
